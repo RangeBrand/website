@@ -1,0 +1,15 @@
+@theme {
+  --color-rb-indigo-500: #421196;
+
+  --color-rb-violet-100: #fcf8ff;
+  --color-rb-violet-200: #ebd6ff;
+  --color-rb-violet-500: #9529ff;
+  --color-rb-violet-600: #850aff;
+  --color-rb-violet-900: #463c74;
+
+  --color-rb-yellow-500: #ffc719;
+
+  --color-rb-red-500: #ff193b;
+
+  --color-rb-carnelian-500: #b8001c;
+}

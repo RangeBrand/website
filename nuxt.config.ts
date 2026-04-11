@@ -1,11 +1,14 @@
+import tailwindcss from "@tailwindcss/vite";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
     "@nuxt/eslint",
     "@nuxt/hints",
+    "@nuxt/image",
     "@nuxt/scripts",
+    "@nuxt/fonts",
     "@nuxtjs/device",
-    "@nuxtjs/tailwindcss",
     "@vueuse/nuxt",
   ],
 
@@ -24,6 +27,7 @@ export default defineNuxtConfig({
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         { charset: "utf-8" },
       ],
+      link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
     },
   },
 
@@ -33,5 +37,9 @@ export default defineNuxtConfig({
 
   typescript: {
     typeCheck: true,
+  },
+
+  vite: {
+    plugins: [tailwindcss()],
   },
 });

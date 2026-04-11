@@ -1,0 +1,14 @@
+@layer components {
+  /* flex */
+  .row {
+    @apply flex flex-wrap;
+  }
+  .col {
+    @apply flex flex-wrap flex-col;
+  }
+
+  /* links */
+  .link {
+    @apply text-rb-red-500 hover:text-rb-carnelian-500 transition-colors ease-in duration-300;
+  }
+}
