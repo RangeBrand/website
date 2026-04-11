@@ -18,9 +18,9 @@
     @apply text-rb-carnelian-500;
   }
   .btn {
-    @apply inline-flex bg-rb-violet-500 text-white px-2 py-1 rounded-4xl;
+    @apply inline-flex bg-rb-violet-500 text-white px-2 py-1 rounded-4xl text-center items-center justify-center;
   }
   .btn[rb-size="lg"] {
-    @apply px-10 py-4 text-lg;
+    @apply px-8 py-2 md:px-10 md:py-4 text-lg;
   }
 }
