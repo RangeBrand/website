@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Logo from "@/components/layout/header/logo.vue";
+
 const links: {
   to: string;
   label: string;
@@ -30,11 +32,7 @@ const links: {
       class="p-2 md:p-16 row gap-8 content-end md:content-between h-screen relative z-10"
     >
       <div class="w-full mt-4">
-        <NuxtImg
-          alt="RangeBrand"
-          src="/favicon.png"
-          class="size-14 md:size-12 block rounded-full"
-        />
+        <Logo no-link img-class="md:size-12 size-14" />
         <ul class="no-list hidden md:block py-4">
           <li v-for="link in links" :key="link.to" class="p-1">
             <NuxtLink
