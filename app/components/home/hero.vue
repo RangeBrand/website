@@ -39,7 +39,7 @@ const links: {
               :to="link.to"
               :title="`دیدن ${link.label}`"
               class="link inline-block"
-              rb-variant="ghost"
+              rb-link-variant="ghost"
             >
               {{ link.label }}
             </NuxtLink>
@@ -66,7 +66,7 @@ const links: {
           <NuxtLink
             href="https://github.com/RangeBrand"
             class="link text-lg text-center"
-            rb-variant="ghost"
+            rb-link-variant="ghost"
             target="_blank"
             title="سورس رنگ‌برند در گیتهاب"
             rel="help"

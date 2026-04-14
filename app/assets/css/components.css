@@ -9,13 +9,17 @@
 
   /* links and buttons */
   .link {
-    @apply text-rb-red-500 transition-colors ease-in duration-200;
+    @apply text-rb-red-500 cursor-pointer transition-colors ease-in duration-200;
   }
-  .link[rb-variant="ghost"] {
+  .link[rb-link-variant="ghost"] {
     @apply text-black/80;
   }
   .link:hover {
     @apply text-rb-carnelian-500;
+  }
+  .link:disabled,
+  .link[disabled] {
+    @apply opacity-60 pointer-events-none;
   }
   .btn {
     @apply inline-flex bg-rb-violet-500 text-white px-2 py-1 rounded-4xl text-center items-center justify-center;
