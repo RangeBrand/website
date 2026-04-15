@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import Logo from "@/components/layout/header/logo.vue";
+import DesktopNav from "@/components/layout/header/nav/desktop/index.vue";
+
+const { isMobile } = useDevice();
 </script>
 
 <template>
@@ -11,6 +14,7 @@ import Logo from "@/components/layout/header/logo.vue";
         <div>
           <Logo class="p-2 block" />
         </div>
+        <DesktopNav v-if="!isMobile" />
       </div>
     </div>
   </header>
