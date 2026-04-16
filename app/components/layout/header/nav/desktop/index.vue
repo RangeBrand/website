@@ -5,7 +5,7 @@ import { LINKS } from "@/consts/nav";
 </script>
 
 <template>
-  <nav aria-label="ناوبری اصلی">
+  <nav aria-label="Desktop navigation">
     <ul class="row mx-4 gap-2">
       <li v-for="(item, index) in LINKS" :key="index" class="relative">
         <NavItem :item />

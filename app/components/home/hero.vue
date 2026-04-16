@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import Logo from "@/components/layout/header/logo.vue";
 
+const { isMobile } = useDevice();
+
 const links: {
   to: string;
   label: string;
@@ -29,11 +31,11 @@ const links: {
       role="presentation"
     />
     <div
-      class="p-2 md:p-16 row gap-8 content-end md:content-between h-screen relative z-10"
+      class="p-2 md:p-16 row gap-8 content-end md:content-between min-h-screen relative z-10"
     >
       <div class="w-full mt-4">
         <Logo no-link img-class="md:size-12 size-14" />
-        <ul class="no-list hidden md:block py-4">
+        <ul v-if="!isMobile" class="no-list py-4">
           <li v-for="link in links" :key="link.to" class="p-1">
             <NuxtLink
               :to="link.to"
@@ -57,9 +59,14 @@ const links: {
           </NuxtLink>
         </p>
         <div class="row items-center gap-4">
-          <NuxtLink class="btn" rb-size="lg" to="/brands/" title="دیدن برند‌ها">
+          <NuxtLink
+            class="btn"
+            rb-btn-size="lg"
+            to="/brands/"
+            title="دیدن برند‌ها"
+          >
             <span>
-              <span class="hidden md:inline"> دیدن </span>
+              <template v-if="!isMobile"> دیدن </template>
               برند‌ها
             </span>
           </NuxtLink>
@@ -71,7 +78,7 @@ const links: {
             title="سورس رنگ‌برند در گیتهاب"
             rel="help"
           >
-            <span class="hidden md:block">یا شاید دوست داشته باشید</span>
+            <template v-if="!isMobile">یا شاید دوست داشته باشید</template>
             توی گیتهاب بهمون کمک کنین
           </NuxtLink>
         </div>
