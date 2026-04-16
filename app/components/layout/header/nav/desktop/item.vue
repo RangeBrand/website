@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { NuxtLinkProps } from "#app";
-import type { VNodeRef, ButtonHTMLAttributes } from "vue";
+import type { ButtonHTMLAttributes } from "vue";
 import type { NavItem } from "@/types/nav";
 
 const props = defineProps<{
@@ -27,19 +27,19 @@ const wrapperCompAttrs = computed<
     title: `بازکردن ${props.item.title}`,
     "aria-expanded": childrenAreOpen.value,
     "aria-haspopup": true,
-    onClick: toggleChildren,
+    onClick: () => toggleChildren(true),
   };
 });
 
 const childrenEl = useTemplateRef("childrenEl");
-const childrenAreOpen = ref<boolean>(false);
+const [childrenAreOpen, toggleChildren] = useToggle(false);
+
 onClickOutside(childrenEl, (e) => {
   if (childrenAreOpen.value) {
     toggleChildren();
     e.stopPropagation();
   }
 });
-const toggleChildren = () => (childrenAreOpen.value = !childrenAreOpen.value);
 </script>
 
 <template>
