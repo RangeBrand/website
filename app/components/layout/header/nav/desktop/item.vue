@@ -55,7 +55,7 @@ const toggleChildren = () => (childrenAreOpen.value = !childrenAreOpen.value);
   >
     {{ item.title }}
   </component>
-  <Transition name="fade">
+  <Transition name="fade-in-down">
     <div
       v-if="item.children"
       v-show="childrenAreOpen"
