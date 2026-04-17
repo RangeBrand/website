@@ -1,3 +1,12 @@
+.fade-in-enter-active,
+.fade-in-leave-active {
+  @apply transition-opacity duration-200 ease-in;
+}
+.fade-in-enter-from,
+.fade-in-leave-to {
+  @apply opacity-0;
+}
+
 .fade-in-down-enter-active,
 .fade-in-down-leave-active {
   @apply transition-all duration-200 ease-in;
@@ -5,4 +14,13 @@
 .fade-in-down-enter-from,
 .fade-in-down-leave-to {
   @apply opacity-0 -translate-y-4;
+}
+
+.slide-in-right-enter-active,
+.slide-in-right-leave-active {
+  @apply transition-transform translate-x-0 duration-200 ease-in;
+}
+.slide-in-right-enter-from,
+.slide-in-right-leave-to {
+  @apply translate-x-full;
 }
