@@ -1,3 +1,8 @@
 export type Id = string | undefined;
 
-export type Color = string;
+export type Hex = `#${string}`;
+
+export type Color = {
+  hex: Hex;
+  isLight: boolean;
+};

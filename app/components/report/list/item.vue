@@ -1,9 +1,23 @@
 <script setup lang="ts">
+import type { Hex } from "~/types/common";
 import type { Item } from "~/types/report";
 
 defineProps<{
   item: Item;
 }>();
+
+const { copy } = useClipboard();
+
+const copyCode = (hex: Hex) => {
+  copy(hex)
+    .then(() => {
+      // TODO: add notif
+      alert("copied");
+    })
+    .catch(() => {
+      // TODO: let's see what's better UX
+    });
+};
 </script>
 
 <template>
@@ -12,9 +26,12 @@ defineProps<{
       <li
         v-for="(color, index) in item.colors"
         :key="index"
-        :style="{ backgroundColor: `#${color}` }"
+        :class="[color.isLight ? 'text-black/80' : 'text-white/80']"
+        :style="{ backgroundColor: color.hex }"
       >
-        <code dir="ltr">{{ color }}</code>
+        <code dir="ltr" @click="copyCode(color.hex)">
+          {{ color.hex.replace("#", "") }}
+        </code>
       </li>
     </ul>
     <NuxtLink
@@ -38,7 +55,7 @@ defineProps<{
   @apply bg-rb-violet-100 rounded-lg p-4;
 }
 ul {
-  @apply flex overflow-hidden rounded-lg border border-gray-200 h-32 -mt-8 mb-3 bg-gray-200 shadow-lg/7;
+  @apply flex overflow-hidden rounded-lg border border-gray-200 h-40 -mt-8 mb-3 bg-gray-200 shadow-lg/7;
 }
 li {
   @apply grow w-1 h-full overflow-hidden;

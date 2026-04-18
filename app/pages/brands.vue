@@ -17,7 +17,7 @@ const brands: Brand[] = [
   {
     title: "بهمان",
     path: "/bar",
-    colors: ["0000ff", "ff00ff"],
+    colors: ["FECC00", "009FE3", "E30613"],
     description: "",
     updated_at: "",
     tags: [],
@@ -68,9 +68,13 @@ const brands: Brand[] = [
 
 const items = computed<Item[]>(() =>
   brands.map((brand) => ({
-    ...pick(brand, ["colors", "title"]),
+    ...pick(brand, ["title"]),
     id: brand.path.replace(/\//g, ""),
     link: `/brands${brand.path}`,
+    colors: brand.colors.map((code) => ({
+      hex: `#${code}`,
+      isLight: isLight(`#${code}`),
+    })),
   })),
 );
 </script>
