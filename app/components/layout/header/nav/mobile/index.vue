@@ -8,6 +8,7 @@ const MENU_ID = "mobile-header-nav";
 const menuEl = useTemplateRef("menuEl");
 const isScrollLocked = useScrollLock(window);
 const [isMenuOpen, toggleMenu] = useHistorySyncedToggle(MENU_ID);
+const route = useRoute();
 
 onClickOutside(menuEl, (e) => {
   if (isMenuOpen.value) {
@@ -18,6 +19,10 @@ onClickOutside(menuEl, (e) => {
 
 watch(isMenuOpen, (newVal) => {
   isScrollLocked.value = newVal;
+});
+
+watch(route, () => {
+  toggleMenu(false);
 });
 </script>
 

@@ -16,7 +16,7 @@ const { isMobile } = useDevice();
       >
         <Logo class="p-2 block justify-self-center" />
         <DesktopNav v-if="!isMobile" />
-        <MobileNav v-if="isMobile" />
+        <MobileNav v-else />
       </div>
     </div>
   </header>
