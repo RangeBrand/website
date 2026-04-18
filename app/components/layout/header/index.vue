@@ -10,11 +10,11 @@ const { isMobile } = useDevice();
   <header
     class="sticky z-50 top-0 inset-x-0 bg-rb-violet-100 border-b border-gray-200"
   >
-    <div class="max-w-7xl mx-auto px-3 sm:px-4 relative">
+    <div class="container mx-auto px-3 sm:px-0 relative">
       <div
         class="flex items-center flex-row-reverse justify-between md:flex-row md:justify-start"
       >
-        <Logo class="p-2 block justify-self-center" />
+        <Logo class="p-2 -mr-2 block justify-self-center" />
         <DesktopNav v-if="!isMobile" />
         <MobileNav v-else />
       </div>
