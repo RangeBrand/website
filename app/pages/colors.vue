@@ -3,5 +3,5 @@ import Report from "~/components/report/index.vue";
 </script>
 
 <template>
-  <Report />
+  <Report :items="[]" />
 </template>
