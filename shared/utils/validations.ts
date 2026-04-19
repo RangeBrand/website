@@ -14,7 +14,7 @@ export const isHex = (input: string): boolean => {
 const isLightCache = new Map<Hex, boolean>();
 export const isLight = (hex: Hex): boolean => {
   let result = isLightCache.get(hex);
-  if (isDefined(result)) {
+  if (result !== undefined) {
     return result;
   }
 
