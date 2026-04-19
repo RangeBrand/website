@@ -2,7 +2,7 @@ import { pick } from "lodash-es";
 
 import type { Brand } from "#shared/types/brand";
 import type { Response } from "#shared/types/api";
-import type { Item } from "@/types/report";
+import type { Item } from "#shared/types/report";
 
 // TODO: Make Dynamic using new dataset
 const brands: Brand[] = [

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import DesktopNavItem from "./item.vue";
 
-import { LINKS } from "@/consts/nav";
+import { LINKS } from "~/consts/nav";
 </script>
 
 <template>

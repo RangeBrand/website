@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { Hex } from "~/types/common";
-import type { Item } from "~/types/report";
+import type { Hex } from "#shared/types/common";
+import type { Item } from "#shared/types/report";
 
 defineProps<{
   item: Item;

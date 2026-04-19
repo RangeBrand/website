@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from "vue";
-import type { NavItem } from "@/types/nav";
+import type { NavItem } from "~/types/nav";
 import type { NuxtLinkProps } from "#app";
 
 const props = defineProps<{

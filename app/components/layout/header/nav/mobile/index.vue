@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import MobileNavItem from "./item.vue";
 
-import { LINKS } from "@/consts/nav";
+import { LINKS } from "~/consts/nav";
 
 const MENU_ID = "mobile-header-nav";
 

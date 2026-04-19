@@ -1,6 +1,6 @@
 import color from "color";
 
-import type { Hex } from "~/types/common";
+import type { Hex } from "~~/shared/types/common";
 
 export const isHex = (input: string): boolean => {
   const regex = /^\#[0-9A-F]{6}$/i;

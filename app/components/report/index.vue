@@ -3,7 +3,7 @@ import Search from "./search/index.vue";
 import List from "./list/index.vue";
 import Pagination from "./pagination/index.vue";
 
-import type { Item } from "~/types/report";
+import type { Item } from "#shared/types/report";
 
 defineProps<{
   hideSearch?: boolean;

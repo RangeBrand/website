@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ReportItem from "./item.vue";
 
-import type { Item } from "~/types/report";
+import type { Item } from "#shared/types/report";
 
 defineProps<{
   items: Item[];

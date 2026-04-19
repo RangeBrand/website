@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Logo from "@/components/layout/header/logo.vue";
-import DesktopNav from "@/components/layout/header/nav/desktop/index.vue";
-import MobileNav from "@/components/layout/header/nav/mobile/index.vue";
+import Logo from "~/components/layout/header/logo.vue";
+import DesktopNav from "~/components/layout/header/nav/desktop/index.vue";
+import MobileNav from "~/components/layout/header/nav/mobile/index.vue";
 
 const { isMobile } = useDevice();
 </script>

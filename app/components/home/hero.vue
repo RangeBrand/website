@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Logo from "@/components/layout/header/logo.vue";
+import Logo from "~/components/layout/header/logo.vue";
 
 const { isMobile } = useDevice();
 
