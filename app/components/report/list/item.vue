@@ -43,7 +43,7 @@ const copyCode = (hex: Hex) => {
       class="link mr-4 font-bold"
       rb-link-variant="ghost"
     >
-      {{ item.title }}
+      {{ item.title || "مشاهده" }}
     </NuxtLink>
   </div>
 </template>
