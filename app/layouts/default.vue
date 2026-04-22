@@ -1,12 +1,23 @@
 <script setup lang="ts">
 import Header from "~/components/layout/header/index.vue";
+import Main from "~/components/layout/main/index.vue";
+
+withDefaults(
+  defineProps<{
+    wrapperClass?: string;
+    wrapperTag?: any; // TODO: fix this
+  }>(),
+  {
+    wrapperTag: Main,
+  }
+);
 </script>
 
 <template>
   <div>
     <Header />
-    <main class="container mx-auto col gap-y-4 py-8 px-3 sm:px-0">
+    <component :is="wrapperTag" :class="wrapperClass">
       <slot />
-    </main>
+    </component>
   </div>
 </template>
