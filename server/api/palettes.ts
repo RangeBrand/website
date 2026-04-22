@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 
 import type { Palette } from "#shared/types/palette";
-import type { Response } from "#shared/types/api";
+import type { ListResponse } from "#shared/types/api";
 import type { Item } from "#shared/types/report";
 
 // TODO: Make Dynamic using new dataset
@@ -20,7 +20,7 @@ const palettes: Palette[] = [
   },
 ];
 
-export default defineEventHandler(async (): Promise<Response<Item>> => {
+export default defineEventHandler(async (): Promise<ListResponse<Item>> => {
   const items: Item[] = palettes.map((palette, index) => ({
     id: nanoid(),
     link: `/colors/${palette.colors.join("-")}`,
