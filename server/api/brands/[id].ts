@@ -3,6 +3,8 @@ import colorConvert from "color-convert";
 
 import { formatList } from "#shared/utils/intl";
 
+import { Nationalities } from "#shared/enums/nationality";
+
 import type { Brand } from "#shared/types/brand";
 import type { DetailResponse } from "#shared/types/api";
 
@@ -27,7 +29,14 @@ const brand: Brand = {
 };
 
 export default defineEventHandler(async (): Promise<DetailResponse> => {
-  const nationality = "ایرانی";
+  const nationality = brand.tags.reduce<Nationalities | undefined>(
+    (result, tag) => {
+      if (result) return result;
+      const key = tag.toUpperCase() as keyof typeof Nationalities;
+      return Nationalities[key];
+    },
+    undefined
+  );
 
   const isClosed = brand.tags.some((tag) => tag.toLowerCase() === "closed");
 
@@ -39,7 +48,7 @@ export default defineEventHandler(async (): Promise<DetailResponse> => {
     ...pick(brand, ["title"]),
     content: [
       brand.long_description ||
-        `${brand.title} یک ${brand.description} ${nationality} ${
+        `${brand.title} یک ${brand.description} ${nationality || ""} ${
           isClosed && "بود که همکنون به فعالیت خود پایان داده"
         } است.`,
       `${brand.title} از رنگ‌های ${colorNames} در هویت سازمانی خود استفاده می‌کند.`,
