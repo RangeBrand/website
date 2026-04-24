@@ -3,7 +3,7 @@ const socialLinks = [
   {
     title: "ایکس",
     icon: "streamline-logos:x-twitter-logo-solid",
-    url: "https://ط.com/RangeBrand",
+    url: "https://x.com/RangeBrand",
   },
   {
     title: "گیتهاب",

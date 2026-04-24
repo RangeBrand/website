@@ -22,19 +22,25 @@
     @apply opacity-60 pointer-events-none;
   }
   .btn {
-    @apply inline-flex bg-rb-violet-500 text-white px-2 py-1 rounded-4xl text-center items-center justify-center;
+    @apply inline-flex gap-x-1.5 bg-rb-violet-500 text-white px-2 py-1 rounded-4xl text-center items-center justify-center cursor-pointer transition-all ease-in duration-200;
   }
   .btn[rb-btn-icon="true"] {
     @apply p-1;
   }
+  .btn[rb-btn-size="sm"] {
+    @apply px-1.5 py-0.5 text-sm gap-x-1;
+  }
   .btn[rb-btn-size="lg"] {
-    @apply px-8 py-2 md:px-10 md:py-4 text-lg;
+    @apply px-8 py-2 md:px-10 md:py-4 text-lg gap-x-2;
   }
   .btn[rb-btn-size="lg"][rb-btn-icon="true"] {
     @apply p-2;
   }
   .btn[rb-btn-variant="ghost"] {
     @apply bg-transparent text-current;
+  }
+  .btn[rb-btn-variant="ghost"]:hover {
+    @apply text-rb-carnelian-500 bg-white shadow;
   }
   .btn[rb-btn-variant="ghost"]:focus {
     @apply bg-rb-violet-100;

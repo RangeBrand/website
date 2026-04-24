@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Palette from "~/components/palette/index.vue";
 import Main from "~/components/layout/main/index.vue";
 import ColorTable from "~/components/brand/colorTable.vue";
 
@@ -17,12 +18,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <div
-    class="h-[75vh] flex items-center justify-center opacity-40 border-b"
-    dir="ltr"
-  >
-    <code>// TODO: Add Palette Here</code>
-  </div>
+  <Palette class="h-[75vh]!" v-if="brand" :colors="brand.colors" />
   <Main v-if="brand" class="text-black text-opacity-80 py-8">
     <h1 class="text-3xl font-bold mt-8 mb-4">
       پالت رنگ‌های رسمی {{ brand.title }} به همراه کدهای RGB و HEX
