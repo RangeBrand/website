@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@iconify-json/lucide": "^1.2.102",
+    "@iconify-json/streamline-logos": "^1.2.0",
     "@nuxt/icon": "^2.2.1",
     "@vueuse/core": "^14.2.1",
     "tailwindcss": "^4.2.2",

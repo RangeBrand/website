@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Header from "~/components/layout/header/index.vue";
+import Footer from "~/components/layout/footer.vue";
 import Main from "~/components/layout/main/index.vue";
 
 withDefaults(
@@ -8,6 +9,7 @@ withDefaults(
     wrapperTag?: any; // TODO: fix this
   }>(),
   {
+    wrapperClass: "min-h-screen",
     wrapperTag: Main,
   }
 );
@@ -19,5 +21,6 @@ withDefaults(
     <component :is="wrapperTag" :class="wrapperClass">
       <slot />
     </component>
+    <Footer />
   </div>
 </template>
