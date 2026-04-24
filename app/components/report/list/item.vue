@@ -25,7 +25,7 @@ const copyCode = (hex: Hex) => {
     <ul>
       <li
         v-for="(color, index) in item.colors"
-        :key="index"
+        :key="color.hex"
         :class="[color.isLight ? 'text-black/80' : 'text-white/80']"
         :style="{ backgroundColor: color.hex }"
       >
