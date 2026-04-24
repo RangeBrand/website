@@ -78,7 +78,7 @@ const links: {
             title="سورس رنگ‌برند در گیتهاب"
             rel="help"
           >
-            <template v-if="!isMobile">یا شاید دوست داشته باشید</template>
+            <span v-if="!isMobile" class="block">یا شاید دوست داشته باشید</span>
             توی گیتهاب بهمون کمک کنین
           </NuxtLink>
         </div>
