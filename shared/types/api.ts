@@ -1,4 +1,4 @@
-import type { Color } from "./common";
+import type { DetailedColor } from "./common";
 
 export type ListMeta = {
   total_count: number;
@@ -14,5 +14,5 @@ export type ListResponse<T> = {
 export type DetailResponse = {
   title: string;
   content: string[];
-  colors: Color[];
+  colors: DetailedColor[];
 };

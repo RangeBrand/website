@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Main from "~/components/layout/main/index.vue";
+import ColorTable from "~/components/brand/colorTable.vue";
 
 definePageMeta({
   middleware: "brand-detail-layout",
@@ -34,11 +35,6 @@ useSeoMeta({
       اطمینان از این که متریال تبلیغاتی شما با برند {{ brand.title }} هماهنگ
       باشد، در کارهای خود از این رنگ‌ها استفاده کنید:
     </p>
-    <div
-      class="my-4 mx-auto max-w-180 h-[428px] flex items-center justify-center opacity-40"
-      dir="ltr"
-    >
-      <code>// TODO: Add Brand Color Table</code>
-    </div>
+    <ColorTable :colors="brand.colors" class="my-4 mx-auto max-w-180 w-full" />
   </Main>
 </template>
