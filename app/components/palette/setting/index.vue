@@ -1,21 +1,21 @@
 <!-- TODO: Make Setting Work -->
 <script setup lang="ts">
+import type { DropdownItem } from "~/types/dropdown";
 import Button from "../footer/action/button.vue";
 import Dropdown from "../footer/action/dropdown.vue";
 
-// TODO: Add Type
-const dropdownItems = [
+const dropdownItems: DropdownItem[] = [
   {
     label: "جدا کردن رنگ‌ها",
-    to: "#",
+    onClick: () => console.log("s"),
   },
   {
     label: "نمایش گرادیانت",
-    to: "#",
+    onClick: () => console.log("s"),
   },
   {
     label: "نمایش رنگ‌های مورد علاقه",
-    to: "#",
+    onClick: () => console.log("s"),
   },
 ];
 </script>

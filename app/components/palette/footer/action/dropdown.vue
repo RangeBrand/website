@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import type { DropdownItem } from "~/types/dropdown";
+
 withDefaults(
   defineProps<{
     position?: "top" | "bottom";
-    items: any[]; // TODO: Add Type
+    items: DropdownItem[];
   }>(),
   {
     position: "bottom",
@@ -39,13 +41,12 @@ onClickOutside(el, () => {
         <ul role="menu" class="text-sm">
           <slot name="before-items" />
           <li v-for="item in items" :key="item.label">
-            <NuxtLink
-              :to="item.to"
+            <button
               class="link block px-2 py-2 hover:bg-rb-violet-100"
               rb-link-variant="ghost"
             >
               {{ item.label }}
-            </NuxtLink>
+            </button>
           </li>
         </ul>
       </div>
