@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     "@nuxt/scripts",
     "@nuxt/fonts",
     "@nuxtjs/device",
+    "@pinia/nuxt",
     "@vueuse/nuxt",
   ],
 
