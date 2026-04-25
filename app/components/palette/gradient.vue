@@ -7,65 +7,24 @@ const props = defineProps<{
   colors: DetailedColor[];
 }>();
 
-const { copy, isSupported } = useClipboard();
+const clipboard = useClipboard();
+const { success } = useToast();
 
 const currentDirection = ref<Direction>(DIRECTIONS[0] as Direction);
-const transitionDuration = 500;
-const baseGradient = ref<string>("");
-const overlayGradient = ref<string>("");
-const isTransitioning = ref<boolean>(false);
-let transitionTimeout: ReturnType<typeof setTimeout> | null = null;
 
 const gradient = computed<string>(() => {
-  return `linear-gradient(to ${currentDirection.value.cssValue}, ${props.colors
-    .map((color) => color.hex.toUpperCase())
-    .join(", ")});`;
-});
-
-const background = computed<string>(() => {
-  return `background: ${gradient.value}`;
-});
-
-watch(
-  gradient,
-  (nextGradient, previousGradient) => {
-    if (!previousGradient) {
-      baseGradient.value = nextGradient;
-      return;
-    }
-
-    if (nextGradient === previousGradient) {
-      return;
-    }
-
-    if (transitionTimeout) {
-      clearTimeout(transitionTimeout);
-    }
-
-    baseGradient.value = previousGradient;
-    overlayGradient.value = nextGradient;
-    isTransitioning.value = true;
-
-    transitionTimeout = setTimeout(() => {
-      baseGradient.value = nextGradient;
-      isTransitioning.value = false;
-      transitionTimeout = null;
-    }, transitionDuration);
-  },
-  { immediate: true }
-);
-
-onBeforeUnmount(() => {
-  if (transitionTimeout) {
-    clearTimeout(transitionTimeout);
-  }
+  return `background: linear-gradient(to ${
+    currentDirection.value.cssValue
+  }, ${props.colors.map((color) => color.hex.toUpperCase()).join(", ")});`;
 });
 
 const copyCode = () => {
-  copy(background.value)
+  clipboard
+    .copy(gradient.value)
     .then(() => {
-      // TODO: add notif
-      alert("copied");
+      success({
+        title: "گرادیانت با موفقیت کپی شد",
+      });
     })
     .catch(() => {
       // TODO: let's see what's better UX
@@ -76,18 +35,18 @@ const copyCode = () => {
 <template>
   <div
     class="absolute inset-0 flex group transition-all duration-700"
-    :style="background"
+    :style="gradient"
   >
     <code
       dir="ltr"
       :class="[
         'block bg-white/20 hover:bg-white/50 group-hover:opacity-100 opacity-0 px-6 py-7 rounded-2xl text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-color duration-200',
-        isSupported ? 'cursor-copy select-none' : 'select-all',
+        clipboard.isSupported ? 'cursor-copy select-none' : 'select-all',
       ]"
       title="کپی گرادیانت"
       @click="copyCode"
     >
-      {{ background }}
+      {{ gradient }}
     </code>
     <ul
       class="flex self-end mx-auto gap-2 mb-6 group-hover:opacity-100 opacity-0 transition-opacity duration-200"

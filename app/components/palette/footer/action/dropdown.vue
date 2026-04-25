@@ -46,7 +46,6 @@ onClickOutside(el, () => {
               rb-link-variant="ghost"
               @click="
                 () => {
-                  console.log('here');
                   item.onClick();
                 }
               "

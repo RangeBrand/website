@@ -6,13 +6,16 @@ defineProps<{
   item: Item;
 }>();
 
-const { copy } = useClipboard();
+const clipboard = useClipboard();
+const { success } = useToast();
 
 const copyCode = (hex: Hex) => {
-  copy(hex)
+  clipboard
+    .copy(hex)
     .then(() => {
-      // TODO: add notif
-      alert("copied");
+      success({
+        title: "رنگ با موفقیت کپی شد",
+      });
     })
     .catch(() => {
       // TODO: let's see what's better UX
@@ -24,12 +27,16 @@ const copyCode = (hex: Hex) => {
   <div class="card">
     <ul>
       <li
-        v-for="(color, index) in item.colors"
+        v-for="color in item.colors"
         :key="color.hex"
         :class="[color.isLight ? 'text-black/80' : 'text-white/80']"
         :style="{ backgroundColor: color.hex }"
       >
-        <code dir="ltr" @click="copyCode(color.hex)">
+        <code
+          dir="ltr"
+          :class="[{ 'cursor-copy': clipboard.isSupported }]"
+          @click="copyCode(color.hex)"
+        >
           {{ color.hex.replace("#", "") }}
         </code>
       </li>
@@ -62,7 +69,7 @@ li {
   @apply hover:w-20;
 }
 code {
-  @apply h-full flex justify-center items-center text-lg font-bold uppercase px-4 cursor-pointer select-none opacity-0;
+  @apply h-full flex justify-center items-center text-lg font-bold uppercase px-4 select-none opacity-0;
   @apply hover:opacity-100;
 }
 

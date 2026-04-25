@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     "@nuxtjs/device",
     "@pinia/nuxt",
     "@vueuse/nuxt",
+    "nuxt-toast",
   ],
 
   devtools: {
@@ -45,6 +46,16 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
     optimizeDeps: {
       include: ["lodash-es"],
+    },
+  },
+
+  toast: {
+    settings: {
+      rtl: true,
+      position: "bottomRight",
+      timeout: 1500,
+      pauseOnHover: true,
+      progressBar: false,
     },
   },
 });
