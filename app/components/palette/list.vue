@@ -2,15 +2,12 @@
 <script setup lang="ts">
 defineProps<{
   colors: DetailedColor[];
+  isolated: boolean;
 }>();
-
-const paletteStore = usePaletteStore();
-
-const { isIsolated } = storeToRefs(paletteStore);
 </script>
 
 <template>
-  <ul :class="[{ isIsolated }]">
+  <ul :data-isolated="isolated">
     <li
       v-for="color in colors"
       :key="color.hex"
@@ -30,7 +27,7 @@ const { isIsolated } = storeToRefs(paletteStore);
 ul {
   @apply bg-white flex h-full uppercase transition-all duration-200 gap-0;
 
-  &.isIsolated {
+  &[data-isolated="true"] {
     @apply p-2 gap-2;
     & > li {
       @apply rounded-lg;

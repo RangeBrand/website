@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import Button from "../footer/action/button.vue";
-import Dropdown from "../footer/action/dropdown.vue";
+import Button from "./footer/action/button.vue";
+import Dropdown from "./footer/action/dropdown.vue";
 
 import type { DropdownItem } from "~/types/dropdown";
 
 const paletteStore = usePaletteStore();
 
-const { toggleIsolated } = paletteStore;
+const { toggleIsolated, toggleGradient } = paletteStore;
 
-const { isIsolated } = storeToRefs(paletteStore);
+const { isIsolated, isGradient } = storeToRefs(paletteStore);
 
 const dropdownItems = computed<DropdownItem[]>(() => [
   {
@@ -16,8 +16,8 @@ const dropdownItems = computed<DropdownItem[]>(() => [
     onClick: toggleIsolated,
   },
   {
-    label: "نمایش گرادیانت",
-    onClick: () => alert("// TODO: show gradient mode"),
+    label: `${isGradient.value ? "مخفی کردن" : "نمایش"} گرادیانت`,
+    onClick: toggleGradient,
   },
   {
     label: "نمایش رنگ‌های مورد علاقه",

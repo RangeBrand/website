@@ -42,7 +42,9 @@
   .btn[rb-btn-variant="ghost"]:hover {
     @apply text-rb-carnelian-500 bg-white shadow;
   }
-  .btn[rb-btn-variant="ghost"]:focus {
+  .btn[rb-btn-variant="ghost"]:focus,
+  .btn[rb-btn-variant="ghost"]:active,
+  .btn[rb-btn-variant="ghost"].focus {
     @apply bg-rb-violet-100;
   }
 }
