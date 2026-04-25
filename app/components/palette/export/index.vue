@@ -4,5 +4,5 @@ import Button from "../footer/action/button.vue";
 </script>
 
 <template>
-  <Button title="خروجی" icon="lucide:share-2" />
+  <Button label="خروجی" icon="lucide:share-2" />
 </template>

@@ -4,5 +4,5 @@ import Button from "../footer/action/button.vue";
 </script>
 
 <template>
-  <Button title="شبیه‌ساز کوررنگی" icon="lucide:glasses" />
+  <Button label="شبیه‌ساز کوررنگی" icon="lucide:glasses" />
 </template>
