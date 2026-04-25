@@ -1,23 +1,29 @@
-<!-- TODO: Make Setting Work -->
 <script setup lang="ts">
-import type { DropdownItem } from "~/types/dropdown";
 import Button from "../footer/action/button.vue";
 import Dropdown from "../footer/action/dropdown.vue";
 
-const dropdownItems: DropdownItem[] = [
+import type { DropdownItem } from "~/types/dropdown";
+
+const paletteStore = usePaletteStore();
+
+const { toggleIsolated } = paletteStore;
+
+const { isIsolated } = storeToRefs(paletteStore);
+
+const dropdownItems = computed<DropdownItem[]>(() => [
   {
-    label: "جدا کردن رنگ‌ها",
-    onClick: () => console.log("s"),
+    label: `${isIsolated.value ? "پیوسته" : "جدا"} رنگ‌ها`,
+    onClick: toggleIsolated,
   },
   {
     label: "نمایش گرادیانت",
-    onClick: () => console.log("s"),
+    onClick: () => alert("// TODO: show gradient mode"),
   },
   {
     label: "نمایش رنگ‌های مورد علاقه",
-    onClick: () => console.log("s"),
+    onClick: () => alert("// TODO: show favorite colors"),
   },
-];
+]);
 </script>
 
 <template>

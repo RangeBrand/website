@@ -42,8 +42,14 @@ onClickOutside(el, () => {
           <slot name="before-items" />
           <li v-for="item in items" :key="item.label">
             <button
-              class="link block px-2 py-2 hover:bg-rb-violet-100"
+              class="link w-full text-right block px-2 py-2 hover:bg-rb-violet-100"
               rb-link-variant="ghost"
+              @click="
+                () => {
+                  console.log('here');
+                  item.onClick();
+                }
+              "
             >
               {{ item.label }}
             </button>

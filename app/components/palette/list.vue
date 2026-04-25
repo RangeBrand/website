@@ -3,25 +3,46 @@
 defineProps<{
   colors: DetailedColor[];
 }>();
+
+const paletteStore = usePaletteStore();
+
+const { isIsolated } = storeToRefs(paletteStore);
 </script>
 
 <template>
-  <ul class="bg-grey-200 flex h-full uppercase">
+  <ul :class="[{ isIsolated }]">
     <li
       v-for="color in colors"
       :key="color.hex"
-      :class="[
-        'grow flex justify-center items-end py-2',
-        color.isLight ? 'text-black/80' : 'text-white/80',
-      ]"
+      :class="[color.isLight ? 'text-black/80' : 'text-white/80']"
       :style="{ backgroundColor: color.hex }"
     >
-      <code
-        dir="ltr"
-        class="block text-lg font-bold uppercase px-4 select-none"
-      >
+      <code dir="ltr">
         {{ color.hex.replace("#", "") }}
       </code>
     </li>
   </ul>
 </template>
+
+<style scoped>
+@reference "~/assets/css/main.css";
+
+ul {
+  @apply bg-white flex h-full uppercase transition-all duration-200 gap-0;
+
+  &.isIsolated {
+    @apply p-2 gap-2;
+    & > li {
+      @apply rounded-lg;
+    }
+  }
+}
+
+li {
+  @apply grow flex items-end justify-center;
+}
+
+code {
+  @apply block text-xl font-bold uppercase p-2 select-none;
+}
+</style>
