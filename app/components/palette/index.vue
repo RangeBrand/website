@@ -1,18 +1,14 @@
-<!-- TODO: Make Buttons Work -->
 <script setup lang="ts">
 import List from "./list.vue";
-import Footer from "./footer.vue";
+import Footer from "./footer/index.vue";
+import Setting from "./setting/index.vue";
+import Export from "./export/index.vue";
+import ColorBlindness from "./colorBlindness/index.vue";
+import Adjustment from "./adjustment/index.vue";
 
 defineProps<{
   colors: DetailedColor[];
 }>();
-
-const BASE_BTN_ATTRS = {
-  class: "btn px-3 py-2",
-  "rb-btn-variant": "ghost",
-  "rb-btn-size": "sm",
-  iconSize: 20,
-};
 </script>
 
 <template>
@@ -20,24 +16,12 @@ const BASE_BTN_ATTRS = {
     <List :colors="colors" />
     <Footer class="grow-0">
       <template #right>
-        <button v-bind="BASE_BTN_ATTRS">
-          <Icon name="lucide:settings" :size="BASE_BTN_ATTRS.iconSize" />
-          تنظیمات
-        </button>
-        <button v-bind="BASE_BTN_ATTRS">
-          <Icon name="lucide:share-2" :size="BASE_BTN_ATTRS.iconSize" />
-          خروجی
-        </button>
+        <Setting />
+        <Export />
       </template>
       <template #left>
-        <button v-bind="BASE_BTN_ATTRS">
-          شبیه‌ساز کوررنگی
-          <Icon name="lucide:glasses" :size="BASE_BTN_ATTRS.iconSize" />
-        </button>
-        <button v-bind="BASE_BTN_ATTRS">
-          تنظیم رنگ‌ها
-          <Icon name="lucide:settings-2" :size="BASE_BTN_ATTRS.iconSize" />
-        </button>
+        <ColorBlindness class="flex-row-reverse" />
+        <Adjustment class="flex-row-reverse" />
       </template>
     </Footer>
   </div>
