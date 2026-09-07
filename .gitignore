@@ -25,5 +25,6 @@ logs
 
 # AI
 .opencode
+.agents
 graphify-out
 docs
