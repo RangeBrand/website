@@ -9,5 +9,5 @@
   preferredstrategy: "pseudoelements";
 }
 body {
-  @apply bg-white;
+  @apply bg-white font-sans;
 }

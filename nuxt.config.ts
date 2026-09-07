@@ -36,6 +36,19 @@ export default defineNuxtConfig({
 
   css: ["~/assets/css/main.css"],
 
+  fonts: {
+    families: [
+      {
+        name: "Vazirmatn",
+        provider: "google",
+        global: true,
+        styles: ["normal"],
+        weights: ["400 900"],
+        subsets: ["arabic", "latin"],
+      },
+    ],
+  },
+
   compatibilityDate: "2025-01-15",
 
   typescript: {
