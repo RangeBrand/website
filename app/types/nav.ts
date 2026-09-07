@@ -1,7 +1,7 @@
 import type { NuxtLinkProps } from "#app";
 import type { AnchorHTMLAttributes } from "vue";
 
-type BaseNavItemType = NuxtLinkProps & AnchorHTMLAttributes;
+type BaseNavItemType = Omit<NuxtLinkProps, "custom"> & AnchorHTMLAttributes;
 
 export type NavItem =
   | (BaseNavItemType & { children?: never })
