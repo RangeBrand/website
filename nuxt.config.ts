@@ -69,6 +69,8 @@ export default defineNuxtConfig({
       timeout: 1500,
       pauseOnHover: true,
       progressBar: false,
+      close: false,
+      animateInside: false
     },
   },
 });

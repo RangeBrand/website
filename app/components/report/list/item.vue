@@ -7,14 +7,15 @@ defineProps<{
 }>();
 
 const clipboard = useClipboard();
-const { success } = useToast();
+const toast = useToast();
 
 const copyCode = (hex: Hex) => {
   clipboard
     .copy(hex)
     .then(() => {
-      success({
-        title: "رنگ با موفقیت کپی شد",
+      toast.success({
+        message: "کپی شد",
+        icon: '',
       });
     })
     .catch(() => {

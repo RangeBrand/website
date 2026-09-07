@@ -11,3 +11,43 @@
 body {
   @apply bg-white font-sans;
 }
+
+.iziToast {
+  @apply font-sans!;
+
+  &.iziToast-color-green {
+    @apply bg-rb-green-500! border-rb-green-500!;
+
+    .iziToast-title,
+    .iziToast-message {
+      @apply text-white!;
+    }
+  }
+
+  &.iziToast-color-red {
+    @apply bg-rb-red-500! border-rb-red-500!;
+
+    .iziToast-title,
+    .iziToast-message {
+      @apply text-white!;
+    }
+  }
+
+  &.iziToast-color-orange {
+    @apply bg-rb-yellow-500! border-rb-yellow-500!;
+
+    .iziToast-title,
+    .iziToast-message {
+      @apply text-rb-violet-900!;
+    }
+  }
+
+  &.iziToast-color-blue {
+    @apply bg-rb-indigo-500! border-rb-indigo-500!;
+
+    .iziToast-title,
+    .iziToast-message {
+      @apply text-white!;
+    }
+  }
+}
