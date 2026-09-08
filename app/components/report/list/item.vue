@@ -15,7 +15,6 @@ const copyCode = (hex: Hex) => {
     .then(() => {
       toast.success({
         message: "کپی شد",
-        icon: '',
       });
     })
     .catch(() => {

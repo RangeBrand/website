@@ -1,5 +1,11 @@
 <script setup lang="ts">
-const show = ref(false);
+import { SITE_DESCRIPTION } from "#shared/seo";
+
+useSeoMeta({
+  title: "درباره‌ی ما",
+  description: SITE_DESCRIPTION,
+  ogDescription: SITE_DESCRIPTION,
+});
 </script>
 <template>
   <code class="text-center opacity-30">TODO: Add About</code>

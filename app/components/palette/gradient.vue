@@ -8,7 +8,7 @@ const props = defineProps<{
 }>();
 
 const clipboard = useClipboard();
-const { success } = useToast();
+const toast = useToast();
 
 const currentDirection = ref<Direction>(DIRECTIONS[0] as Direction);
 
@@ -22,8 +22,8 @@ const copyCode = () => {
   clipboard
     .copy(gradient.value)
     .then(() => {
-      success({
-        title: "گرادیانت با موفقیت کپی شد",
+      toast.success({
+        message: "گرادیانت با موفقیت کپی شد",
       });
     })
     .catch(() => {

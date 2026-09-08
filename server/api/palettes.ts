@@ -23,7 +23,7 @@ const palettes: Palette[] = [
 export default defineEventHandler(async (): Promise<ListResponse<Item>> => {
   const items: Item[] = palettes.map((palette, index) => ({
     id: nanoid(),
-    link: `/colors/${palette.colors.join("-")}`,
+    link: `/palette?colors=${palette.colors.join("-")}`,
     colors: palette.colors.map((code) => ({
       hex: `#${code}`, // TODO: remove # when using new dataset
       isLight: isLight(`#${code}`),

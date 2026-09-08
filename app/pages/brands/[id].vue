@@ -3,6 +3,8 @@ import Palette from "~/components/palette/index.vue";
 import Main from "~/components/layout/main/index.vue";
 import ColorTable from "~/components/brand/colorTable.vue";
 
+import { SITE_DESCRIPTION, SITE_NAME } from "#shared/seo";
+
 definePageMeta({
   middleware: "brand-detail-layout",
 });
@@ -13,7 +15,9 @@ const { data } = await useFetch(`/api/brands/${params.id}`);
 const brand = computed(() => data.value);
 
 useSeoMeta({
-  title: `رنگ‌های ${brand.value?.title} - رنگ برند`,
+  title: () => (brand.value?.title ? `رنگ‌های ${brand.value.title}` : SITE_NAME),
+  description: () => brand.value?.content?.[0] ?? SITE_DESCRIPTION,
+  ogDescription: () => brand.value?.content?.[0] ?? SITE_DESCRIPTION,
 });
 </script>
 

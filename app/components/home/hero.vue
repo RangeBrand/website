@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import Logo from "~/components/layout/header/logo.vue";
 
-const { isMobile } = useDevice();
-
 const links: {
   to: string;
   label: string;
@@ -23,19 +21,20 @@ const links: {
 </script>
 
 <template>
-  <div class="relative overflow-hidden bg-rb-violet-100 text-rb-violet-900">
+  <main class="relative overflow-hidden bg-rb-violet-100 text-rb-violet-900">
     <NuxtImg
       src="/aare.svg"
       alt="banner"
       class="absolute top-0 left-0 md:h-screen max-w-full md:max-w-3/4 2xl:max-w-full -translate-y-1/5 -scale-x-140 scale-y-140"
       role="presentation"
+      fetchpriority="high"
     />
     <div
       class="p-2 md:p-16 row gap-8 content-end md:content-between min-h-screen relative z-10"
     >
       <div class="w-full mt-4">
         <Logo no-link img-class="md:size-12 size-14" />
-        <ul v-if="!isMobile" class="no-list py-4">
+        <ul class="no-list py-4 hidden md:block">
           <li v-for="link in links" :key="link.to" class="p-1">
             <NuxtLink
               :to="link.to"
@@ -66,7 +65,7 @@ const links: {
             title="دیدن برند‌ها"
           >
             <span>
-              <template v-if="!isMobile"> دیدن </template>
+              <span class="hidden md:inline"> دیدن </span>
               برند‌ها
             </span>
           </NuxtLink>
@@ -78,11 +77,11 @@ const links: {
             title="سورس رنگ‌برند در گیتهاب"
             rel="help"
           >
-            <span v-if="!isMobile" class="block">یا شاید دوست داشته باشید</span>
+            <span class="hidden md:block">یا شاید دوست داشته باشید</span>
             توی گیتهاب بهمون کمک کنین
           </NuxtLink>
         </div>
       </div>
     </div>
-  </div>
+  </main>
 </template>

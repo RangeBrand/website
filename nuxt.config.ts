@@ -1,5 +1,7 @@
 import tailwindcss from "@tailwindcss/vite";
 
+import { SITE_DESCRIPTION, SITE_NAME } from "./shared/seo";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
@@ -21,14 +23,16 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: "رنگ برند",
+      title: SITE_NAME,
+      titleTemplate: `%s - ${SITE_NAME}`,
       htmlAttrs: {
         dir: "rtl",
         lang: "fa",
       },
+      viewport: "width=device-width, initial-scale=1, viewport-fit=cover",
       meta: [
-        { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { charset: "utf-8" },
+        { name: "description", content: SITE_DESCRIPTION },
+        { property: "og:description", content: SITE_DESCRIPTION },
       ],
       link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
     },
@@ -44,7 +48,7 @@ export default defineNuxtConfig({
         global: true,
         styles: ["normal"],
         weights: ["400 900"],
-        subsets: ["arabic", "latin"],
+        subsets: ["arabic"],
       },
     ],
   },

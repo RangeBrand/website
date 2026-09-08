@@ -2,8 +2,6 @@
 import Logo from "~/components/layout/header/logo.vue";
 import DesktopNav from "~/components/layout/header/nav/desktop/index.vue";
 import MobileNav from "~/components/layout/header/nav/mobile/index.vue";
-
-const { isMobile } = useDevice();
 </script>
 
 <template>
@@ -15,8 +13,8 @@ const { isMobile } = useDevice();
         class="flex items-center flex-row-reverse justify-between md:flex-row md:justify-start"
       >
         <Logo class="p-2 -mr-2 block justify-self-center" />
-        <DesktopNav v-if="!isMobile" />
-        <MobileNav v-else />
+        <DesktopNav class="hidden md:block" />
+        <MobileNav class="md:hidden" />
       </div>
     </div>
   </header>
