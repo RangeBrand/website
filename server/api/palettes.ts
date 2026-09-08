@@ -1,33 +1,21 @@
 import { nanoid } from "nanoid";
+import palettes from "rangebrand/colors";
 
-import type { Palette } from "#shared/types/palette";
 import type { ListResponse } from "#shared/types/api";
+import type { Hex } from "#shared/types/common";
 import type { Item } from "#shared/types/report";
 
-// TODO: Make Dynamic using new dataset
-const palettes: Palette[] = [
-  {
-    colors: ["fc85ae", "9e579d", "574b90", "303a52"],
-  },
-  {
-    colors: ["16171d", "095af9", "ffffff"],
-  },
-  {
-    colors: ["5bd1d7", "348498", "004d61", "ff502f"],
-  },
-  {
-    colors: ["c00000", "de3c3c", "f7b32d"],
-  },
-];
-
 export default defineEventHandler(async (): Promise<ListResponse<Item>> => {
-  const items: Item[] = palettes.map((palette, index) => ({
+  const items: Item[] = Object.values(palettes).map((palette) => ({
     id: nanoid(),
-    link: `/palette?colors=${palette.colors.join("-")}`,
-    colors: palette.colors.map((code) => ({
-      hex: `#${code}`, // TODO: remove # when using new dataset
-      isLight: isLight(`#${code}`),
-    })),
+    link: `/palette?colors=${palette.colors.map((code) => code.replace("#", "")).join("-")}`,
+    colors: palette.colors.map((code) => {
+      const hex = code as Hex;
+      return {
+        hex,
+        isLight: isLight(hex),
+      };
+    }),
   }));
 
   return {

@@ -59,6 +59,9 @@ importers:
       pinia:
         specifier: ^4.0.3
         version: 4.0.3(@vue/devtools-api@8.2.1)(typescript@6.0.3)(vue@3.5.42(typescript@6.0.3))
+      rangebrand:
+        specifier: ^1.0.0
+        version: 1.0.0
       vue:
         specifier: ^3.5.42
         version: 3.5.42(typescript@6.0.3)
@@ -4210,6 +4213,10 @@ packages:
   range-parser@1.3.0:
     resolution: {integrity: sha512-hek2mFQpPuI4E1BBKrSto+BU3e3x4xuarsbiwr3+lf7p44juvFMV0XFWQAP3xUyqXA4RrXLIoaSUGbSt056ZMw==}
     engines: {node: '>= 0.6'}
+
+  rangebrand@1.0.0:
+    resolution: {integrity: sha512-maQgTQnTe6MKK02EsdsAmaJBlhg274nRONoljp24nQ/X2dNHRZoksHGy48AKJIL9072zf+lC8XZO3lYAXKHUNQ==}
+    engines: {node: '>=18'}
 
   rc9@3.1.0:
     resolution: {integrity: sha512-ufjkNVzbRHKcCOmTahZkmVsyc3W+MSk3jY03m+a7tGHkIsdVMG9l10/3HvFbWkkKzY5VFp3pkRsIo/UYgmFL7Q==}
@@ -9694,6 +9701,8 @@ snapshots:
   radix3@1.1.2: {}
 
   range-parser@1.3.0: {}
+
+  rangebrand@1.0.0: {}
 
   rc9@3.1.0:
     dependencies:
