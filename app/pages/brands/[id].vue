@@ -6,6 +6,11 @@ import ColorTable from "~/components/brand/colorTable.vue";
 import { SITE_DESCRIPTION, SITE_NAME } from "#shared/seo";
 
 definePageMeta({
+  validate: (route) => {
+    const id = route.params.id;
+    const value = Array.isArray(id) ? id[0] : id;
+    return typeof value === "string" && !/^\d+$/.test(value);
+  },
   middleware: "brand-detail-layout",
 });
 

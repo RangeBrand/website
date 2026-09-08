@@ -2,9 +2,7 @@
 import Report from "~/components/report/index.vue";
 import { COLORS_DESCRIPTION } from "#shared/seo";
 
-const { data } = await useFetch("/api/palettes");
-
-const items = computed(() => data.value?.items || []);
+const { items, meta } = await usePagedList("/api/palettes");
 
 useSeoMeta({
   title: "رنگ‌ها",
@@ -14,5 +12,5 @@ useSeoMeta({
 </script>
 
 <template>
-  <Report :items hide-search hide-pagination />
+  <Report :items :meta hide-search />
 </template>

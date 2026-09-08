@@ -4,7 +4,7 @@ This repo is a **rewrite** of [rangebrand.ir](https://rangebrand.ir): Persian, R
 
 ## Rewrite, do not copy
 
-The old product lives at [RangeBrand/RangeBrand `src/`](https://github.com/RangeBrand/RangeBrand/tree/main/src): **Gridsome 0.7 + Vue 2 Options API + Vuex + JavaScript + Tailwind 2**.
+The old product lives at [RangeBrand/RangeBrand `src/`](https://github.com/RangeBrand/RangeBrand/tree/old): **Gridsome 0.7 + Vue 2 Options API + Vuex + JavaScript + Tailwind 2**.
 
 Use that source for **features, copy, routes, and UX**. Do **not** port Options API, Vuex, Gridsome APIs, file names, or CSS wholesale. Reimplement with Nuxt 4, Vue 3 `<script setup lang="ts">`, Pinia, Tailwind v4, and the current `app/` layout.
 

@@ -2,7 +2,15 @@
 import Report from "~/components/report/index.vue";
 import { BRANDS_DESCRIPTION } from "#shared/seo";
 
-const { items, meta } = await usePagedList("/api/brands");
+definePageMeta({
+  path: "/brands/:page(\\d+)",
+});
+
+const { items, meta, page } = await usePagedList("/api/brands");
+
+if (page.value === 1) {
+  await navigateTo("/brands", { redirectCode: 301, replace: true });
+}
 
 useSeoMeta({
   title: "برندها",
