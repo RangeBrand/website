@@ -29,7 +29,7 @@ const { isIsolated, isGradient } = storeToRefs(paletteStore);
     <Footer class="grow-0">
       <template #right>
         <Setting />
-        <Export />
+        <Export :colors :original-colors="colors" />
       </template>
       <template #left>
         <ColorBlindness class="flex-row-reverse" />

@@ -10,14 +10,24 @@ const { toggleIsolated, toggleGradient } = paletteStore;
 
 const { isIsolated, isGradient } = storeToRefs(paletteStore);
 
+const onIsolationToggle = () => {
+  toggleIsolated();
+  toggleGradient(false)
+};
+
+const onGradientToggle = () => {
+  toggleGradient();
+  toggleIsolated(false)
+};
+
 const dropdownItems = computed<DropdownItem[]>(() => [
   {
-    label: `${isIsolated.value ? "پیوسته" : "جدا"} رنگ‌ها`,
-    onClick: toggleIsolated,
+    label: `${isIsolated.value ? "پیوسته" : "جدا"} کردن رنگ‌ها`,
+    onClick: onIsolationToggle,
   },
   {
     label: `${isGradient.value ? "مخفی کردن" : "نمایش"} گرادیانت`,
-    onClick: toggleGradient,
+    onClick: onGradientToggle,
   },
   {
     label: "نمایش رنگ‌های مورد علاقه",
