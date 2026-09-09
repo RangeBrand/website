@@ -8,9 +8,19 @@ import Export from "./export/index.vue";
 import ColorBlindness from "./colorBlindness/index.vue";
 import Adjustment from "./adjustment/index.vue";
 
-defineProps<{
+const props = defineProps<{
   colors: DetailedColor[];
 }>();
+
+const localColors = ref<DetailedColor[]>([]);
+
+watch(
+  () => props.colors,
+  (next) => {
+    localColors.value = [...next];
+  },
+  { immediate: true },
+);
 
 const paletteStore = usePaletteStore();
 
@@ -20,16 +30,16 @@ const { isIsolated, isGradient } = storeToRefs(paletteStore);
 <template>
   <div class="h-screen flex flex-col">
     <div class="grow relative">
-      <List :colors :isolated="isIsolated" />
+      <List v-model="localColors" :isolated="isIsolated" />
 
       <Transition name="fade-in">
-        <Gradient v-show="isGradient" :colors />
+        <Gradient v-show="isGradient" :colors="localColors" />
       </Transition>
     </div>
     <Footer class="grow-0">
       <template #right>
         <Setting />
-        <Export :colors :original-colors="colors" />
+        <Export :colors="localColors" :original-colors="colors" />
       </template>
       <template #left>
         <ColorBlindness class="flex-row-reverse" />
