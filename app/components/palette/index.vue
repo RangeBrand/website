@@ -18,7 +18,7 @@ const props = defineProps<{
 
 const paletteStore = usePaletteStore();
 
-const { isIsolated, isGradient, originalColors, altColors, displayColors, isColorBlindMode } =
+const { isIsolated, isGradient, originalColors, altColors, displayColors, isPaletteAsideOpen } =
   storeToRefs(paletteStore);
 
 watch(
@@ -35,7 +35,7 @@ watch(
     :class="[
       'flex h-screen flex-col transition-[padding-inline-end]',
       PALETTE_ASIDE_MOTION_CLASS,
-      isColorBlindMode ? PALETTE_ASIDE_INSET_CLASS : 'pe-0',
+      isPaletteAsideOpen ? PALETTE_ASIDE_INSET_CLASS : 'pe-0',
     ]"
   >
     <div class="grow relative">

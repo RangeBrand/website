@@ -9,7 +9,7 @@ import type { ColorBlindnessType } from "#shared/types/colorBlindness";
 const COLOR_BLINDNESS_ID = "palette-color-blindness";
 
 const paletteStore = usePaletteStore();
-const { altColors } = storeToRefs(paletteStore);
+const { altColors, isAdjustMode } = storeToRefs(paletteStore);
 
 const selectedType = ref<ColorBlindnessType>("normal");
 
@@ -28,6 +28,10 @@ watch(isOpen, (open) => {
 watch(selectedType, (type) => {
   if (!isOpen.value) return;
   paletteStore.applyColorBlindness(type);
+});
+
+watch(isAdjustMode, (on) => {
+  if (on && isOpen.value) toggle(false);
 });
 
 const close = () => toggle(false);
