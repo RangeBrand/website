@@ -62,7 +62,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {
-      include: ["lodash-es"],
+      include: ["lodash-es", "color-blind"],
     },
   },
 

@@ -8,38 +8,51 @@ import Export from "./export/index.vue";
 import ColorBlindness from "./colorBlindness/index.vue";
 import Adjustment from "./adjustment/index.vue";
 
+import { PALETTE_ASIDE_INSET_CLASS, PALETTE_ASIDE_MOTION_CLASS } from "~/consts/aside";
+
+import type { DetailedColor } from "#shared/types/common";
+
 const props = defineProps<{
   colors: DetailedColor[];
 }>();
 
-const localColors = ref<DetailedColor[]>([]);
+const paletteStore = usePaletteStore();
+
+const { isIsolated, isGradient, originalColors, altColors, displayColors, isColorBlindMode } =
+  storeToRefs(paletteStore);
 
 watch(
   () => props.colors,
   (next) => {
-    localColors.value = [...next];
+    paletteStore.setOriginalColors(next);
   },
   { immediate: true },
 );
-
-const paletteStore = usePaletteStore();
-
-const { isIsolated, isGradient } = storeToRefs(paletteStore);
 </script>
 
 <template>
-  <div class="h-screen flex flex-col">
+  <div
+    :class="[
+      'flex h-screen flex-col transition-[padding-inline-end]',
+      PALETTE_ASIDE_MOTION_CLASS,
+      isColorBlindMode ? PALETTE_ASIDE_INSET_CLASS : 'pe-0',
+    ]"
+  >
     <div class="grow relative">
-      <List v-model="localColors" :isolated="isIsolated" />
+      <List
+        v-model="originalColors"
+        :alt-colors="altColors"
+        :isolated="isIsolated"
+      />
 
       <Transition name="fade-in">
-        <Gradient v-show="isGradient" :colors="localColors" />
+        <Gradient v-show="isGradient" :colors="displayColors" />
       </Transition>
     </div>
     <Footer class="grow-0">
       <template #right>
         <Setting />
-        <Export :colors="localColors" :original-colors="colors" />
+        <Export :colors="originalColors" :original-colors="colors" />
       </template>
       <template #left>
         <ColorBlindness class="flex-row-reverse" />

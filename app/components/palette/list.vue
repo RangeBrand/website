@@ -2,13 +2,19 @@
 <script setup lang="ts">
 import { clamp } from "lodash-es";
 
-import type { Hex } from "#shared/types/common";
+import type { DetailedColor, Hex } from "#shared/types/common";
 
 const colors = defineModel<DetailedColor[]>({ required: true });
 
-defineProps<{
-  isolated: boolean;
-}>();
+const props = withDefaults(
+  defineProps<{
+    isolated: boolean;
+    altColors?: DetailedColor[];
+  }>(),
+  {
+    altColors: () => [],
+  },
+);
 
 const clipboard = useClipboard();
 const toast = useToast();
@@ -38,6 +44,12 @@ const colorWidth = computed(() =>
 
 const colorWidthPercent = computed(() =>
   colorCount.value ? 100 / colorCount.value : 0,
+);
+
+const hasAlts = computed(
+  () =>
+    props.altColors.length > 0 &&
+    props.altColors.length === colors.value.length,
 );
 
 const resetTranslates = () => {
@@ -129,24 +141,52 @@ const actionClass = (isLight: boolean) => [
     ref="list"
     :data-isolated="isolated"
     :data-dragging="activeIndex !== null"
+    :data-split="hasAlts"
   >
     <li
       v-for="(color, index) in colors"
-      :key="color.hex"
+      :key="`${color.hex}-${index}`"
       :class="[
         'group',
-        color.isLight ? 'text-black/80' : 'text-white/80',
+        !hasAlts && (color.isLight ? 'text-black/80' : 'text-white/80'),
         index === activeIndex ? 'z-50' : 'z-0 transition-transform duration-200',
       ]"
       :style="{
-        backgroundColor: color.hex,
+        backgroundColor: hasAlts ? undefined : color.hex,
         width: `${colorWidthPercent}%`,
         insetInlineStart: `${colorWidthPercent * index}%`,
         transform: `translateX(${translates[index] ?? 0}px)`,
       }"
     >
+      <template v-if="hasAlts && altColors[index]">
+        <div
+          class="flex h-1/2 items-end justify-center"
+          :class="
+            altColors[index].isLight ? 'text-black/80' : 'text-white/80'
+          "
+          :style="{ backgroundColor: altColors[index].hex }"
+        >
+          <code dir="ltr">
+            {{ altColors[index].hex.replace("#", "") }}
+          </code>
+        </div>
+        <div
+          class="flex h-1/2 items-end justify-center"
+          :class="color.isLight ? 'text-black/80' : 'text-white/80'"
+          :style="{ backgroundColor: color.hex }"
+        >
+          <code dir="ltr">
+            {{ color.hex.replace("#", "") }}
+          </code>
+        </div>
+      </template>
+      <code v-else dir="ltr">
+        {{ color.hex.replace("#", "") }}
+      </code>
       <div
-        v-if="clipboard.isSupported || isDesktop || colorCount > 2"
+        v-if="
+          !hasAlts && (clipboard.isSupported || isDesktop || colorCount > 2)
+        "
         class="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 pb-12 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
       >
         <button
@@ -180,9 +220,6 @@ const actionClass = (isLight: boolean) => [
           <Icon name="lucide:copy" size="24" aria-hidden="true" />
         </button>
       </div>
-      <code dir="ltr">
-        {{ color.hex.replace("#", "") }}
-      </code>
     </li>
   </ul>
 </template>
@@ -196,12 +233,16 @@ ul {
   &[data-isolated="true"] {
     @apply p-2;
     & > li {
-      @apply rounded-lg;
+      @apply overflow-hidden rounded-lg;
     }
   }
 
   &[data-dragging="true"] {
     @apply cursor-grabbing select-none;
+  }
+
+  &[data-split="true"] li {
+    @apply flex-col items-stretch justify-stretch;
   }
 }
 
