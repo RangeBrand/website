@@ -123,7 +123,7 @@ const copyCode = (hex: Hex) => {
 }
 
 const removeColor = (index: number) => {
-  if (colors.value.length <= 2) return
+  if (colors.value.length <= 1) return
   const next = [...colors.value]
   next.splice(index, 1)
   colors.value = next
@@ -221,24 +221,7 @@ const actionClass = (isLight: boolean) => [
         class="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 pb-12 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
       >
         <button
-          type="button"
-          :class="actionClass(color.isLight)"
-          :title="
-            favoritesStore.isFavorite(color.hex)
-              ? 'حذف از علاقه‌مندی‌ها'
-              : 'افزودن به علاقه‌مندی‌ها'
-          "
-          :aria-pressed="favoritesStore.isFavorite(color.hex)"
-          @click.stop="favoritesStore.toggleFavorite(color.hex)"
-        >
-          <Icon
-            :name="favoritesStore.isFavorite(color.hex) ? 'hugeicons:heart-check' : 'hugeicons:heart'"
-            size="24"
-            aria-hidden="true"
-          />
-        </button>
-        <button
-          v-if="colorCount > 2"
+          v-if="colorCount > 1"
           type="button"
           :class="actionClass(color.isLight)"
           title="حذف رنگ"
@@ -247,7 +230,7 @@ const actionClass = (isLight: boolean) => [
           <Icon name="hugeicons:delete-02" size="24" aria-hidden="true" />
         </button>
         <button
-          v-if="isDesktop"
+          v-if="isDesktop && colorCount > 1"
           type="button"
           :class="[
             actionClass(color.isLight),
@@ -266,6 +249,25 @@ const actionClass = (isLight: boolean) => [
           @click="copyCode(color.hex)"
         >
           <Icon name="hugeicons:copy-01" size="24" aria-hidden="true" />
+        </button>
+        <button
+          type="button"
+          :class="actionClass(color.isLight)"
+          :title="
+            favoritesStore.isFavorite(color.hex)
+              ? 'حذف از علاقه‌مندی‌ها'
+              : 'افزودن به علاقه‌مندی‌ها'
+          "
+          :aria-pressed="favoritesStore.isFavorite(color.hex)"
+          @click.stop="favoritesStore.toggleFavorite(color.hex)"
+        >
+          <Icon
+            :name="
+              favoritesStore.isFavorite(color.hex) ? 'hugeicons:heart-check' : 'hugeicons:heart'
+            "
+            size="24"
+            aria-hidden="true"
+          />
         </button>
       </div>
     </li>
@@ -294,6 +296,10 @@ ul {
   &[data-shades="true"] li {
     @apply flex-col items-stretch justify-stretch;
   }
+
+  &[data-shades="true"] code {
+    @apply origin-center;
+  }
 }
 
 li {
@@ -301,6 +307,6 @@ li {
 }
 
 code {
-  @apply block p-2 text-xl font-bold uppercase select-none;
+  @apply block p-2 font-bold uppercase select-none max-md:origin-center max-md:-translate-y-8 max-md:-rotate-90 md:text-xl;
 }
 </style>

@@ -36,7 +36,10 @@ const inputId = computed(() => `color-${props.name}`)
   <div class="col gap-2">
     <label class="text-black/80" :for="inputId">{{ label }}</label>
     <div class="relative">
-      <div class="absolute size-10 top-2 right-2 pointer-events-none border border-gray-200 rounded-lg flex items-center justify-center" :style="{ backgroundColor: model }" />
+      <div
+        class="pointer-events-none absolute top-2 right-2 flex size-10 items-center justify-center rounded-lg border border-gray-200"
+        :style="{ backgroundColor: model }"
+      />
       <input
         type="text"
         dir="ltr"
