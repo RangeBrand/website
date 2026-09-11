@@ -1,27 +1,27 @@
-import color from "color";
+import color from "color"
 
-import type { Hex } from "~~/shared/types/common";
+import type { Hex } from "~~/shared/types/common"
 
 export const isHex = (input: string): boolean => {
-  const regex = /^\#[0-9A-F]{6}$/i;
+  const regex = /^#[0-9A-F]{6}$/i
   try {
-    return regex.test(input.toUpperCase());
+    return regex.test(input.toUpperCase())
   } catch {
-    return false;
+    return false
   }
-};
+}
 
-const isLightCache = new Map<Hex, boolean>();
+const isLightCache = new Map<Hex, boolean>()
 export const isLight = (hex: Hex): boolean => {
-  let result = isLightCache.get(hex);
+  let result = isLightCache.get(hex)
   if (result !== undefined) {
-    return result;
+    return result
   }
 
-  if (!isHex(hex)) return false;
+  if (!isHex(hex)) return false
 
-  result = color(hex).isLight();
+  result = color(hex).isLight()
 
-  isLightCache.set(hex, result);
-  return result;
-};
+  isLightCache.set(hex, result)
+  return result
+}

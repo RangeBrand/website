@@ -7,4 +7,4 @@ export type ColorBlindnessType =
   | "deuteranomaly"
   | "tritanomaly"
   | "achromatomaly"
-  | "achromatopsia";
+  | "achromatopsia"

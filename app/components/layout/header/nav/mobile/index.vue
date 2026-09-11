@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import MobileNavItem from "./item.vue";
+import MobileNavItem from "./item.vue"
 
-import { LINKS } from "~/consts/nav";
+import { LINKS } from "~/consts/nav"
 
-const MENU_ID = "mobile-header-nav";
+const MENU_ID = "mobile-header-nav"
 
-const menuEl = useTemplateRef("menuEl");
-const isScrollLocked = useScrollLock(window);
-const [isMenuOpen, toggleMenu] = useHistorySyncedToggle(MENU_ID);
+const menuEl = useTemplateRef("menuEl")
+const isScrollLocked = useScrollLock(window)
+const [isMenuOpen, toggleMenu] = useHistorySyncedToggle(MENU_ID)
 
 onClickOutside(menuEl, (e) => {
   if (isMenuOpen.value) {
-    toggleMenu();
-    e.stopPropagation();
+    toggleMenu()
+    e.stopPropagation()
   }
-});
+})
 
 watch(isMenuOpen, (newVal) => {
-  isScrollLocked.value = newVal;
-});
+  isScrollLocked.value = newVal
+})
 </script>
 
 <template>
@@ -31,9 +31,7 @@ watch(isMenuOpen, (newVal) => {
       rb-btn-icon="true"
       :aria-expanded="isMenuOpen"
       :aria-controls="MENU_ID"
-      :aria-label="
-        isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'
-      "
+      :aria-label="isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'"
       @click="toggleMenu()"
     >
       <Icon name="lucide:menu" size="32" />
@@ -49,7 +47,7 @@ watch(isMenuOpen, (newVal) => {
           <div
             v-show="isMenuOpen"
             ref="menuEl"
-            class="col gap-y-3 py-3 w-2/3 h-full bg-rb-violet-100 border-l border-gray-200 shadow-lg delay-75"
+            class="col h-full w-2/3 gap-y-3 border-l border-gray-200 bg-rb-violet-100 py-3 shadow-lg delay-75"
           >
             <div class="mr-auto px-3">
               <button

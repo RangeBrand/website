@@ -1,6 +1,6 @@
-import { defineNuxtPlugin } from "#app";
-import { NuxtLink } from "#components";
+import { defineNuxtPlugin } from "#app"
+import { NuxtLink } from "#components"
 
 export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.vueApp.component("NuxtLink", NuxtLink);
-});
+  nuxtApp.vueApp.component("NuxtLink", NuxtLink)
+})

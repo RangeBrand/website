@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Logo from "~/components/layout/header/logo.vue";
+import Logo from "~/components/layout/header/logo.vue"
 
 const links: {
-  to: string;
-  label: string;
+  to: string
+  label: string
 }[] = [
   {
     to: "/brands/",
@@ -17,7 +17,7 @@ const links: {
     to: "/about/",
     label: "درباره ما",
   },
-];
+]
 </script>
 
 <template>
@@ -25,16 +25,14 @@ const links: {
     <NuxtImg
       src="/aare.svg"
       alt="banner"
-      class="absolute top-0 left-0 md:h-screen max-w-full md:max-w-3/4 2xl:max-w-full -translate-y-1/5 -scale-x-140 scale-y-140"
+      class="absolute top-0 left-0 max-w-full -translate-y-1/5 -scale-x-140 scale-y-140 md:h-screen md:max-w-3/4 2xl:max-w-full"
       role="presentation"
       fetchpriority="high"
     />
-    <div
-      class="p-2 md:p-16 row gap-8 content-end md:content-between min-h-screen relative z-10"
-    >
-      <div class="w-full mt-4">
+    <div class="row relative z-10 min-h-screen content-end gap-8 p-2 md:content-between md:p-16">
+      <div class="mt-4 w-full">
         <Logo no-link img-class="md:size-12 size-14" />
-        <ul class="no-list py-4 hidden md:block">
+        <ul class="no-list hidden py-4 md:block">
           <li v-for="link in links" :key="link.to" class="p-1">
             <NuxtLink
               :to="link.to"
@@ -48,22 +46,17 @@ const links: {
         </ul>
       </div>
 
-      <div class="col gap-8 w-full md:w-1/3">
-        <h1 class="block text-6xl md:text-9xl font-black">رنگـ‌برند</h1>
-        <p class="text-lg md:text-2xl leading-9">
-          لیستی از رنگ‌هایی که دور و بر خودمون توی ایران میبینیم. شاید این
-          رنگ‌ها بتونن کمکمون کنن تا برای برندمون
+      <div class="col w-full gap-8 md:w-1/3">
+        <h1 class="block text-6xl font-black md:text-9xl">رنگـ‌برند</h1>
+        <p class="text-lg leading-9 md:text-2xl">
+          لیستی از رنگ‌هایی که دور و بر خودمون توی ایران میبینیم. شاید این رنگ‌ها بتونن کمکمون کنن
+          تا برای برندمون
           <NuxtLink to="/colors/" title="دیدن رنگ‌ها" class="link">
             رنگ بهتری انتخاب کنیم
           </NuxtLink>
         </p>
         <div class="row items-center gap-4">
-          <NuxtLink
-            class="btn"
-            rb-btn-size="lg"
-            to="/brands/"
-            title="دیدن برند‌ها"
-          >
+          <NuxtLink class="btn" rb-btn-size="lg" to="/brands/" title="دیدن برند‌ها">
             <span>
               <span class="hidden md:inline"> دیدن </span>
               برند‌ها
@@ -71,7 +64,7 @@ const links: {
           </NuxtLink>
           <NuxtLink
             href="https://github.com/RangeBrand"
-            class="link text-lg text-center"
+            class="link text-center text-lg"
             rb-link-variant="ghost"
             target="_blank"
             title="سورس رنگ‌برند در گیتهاب"

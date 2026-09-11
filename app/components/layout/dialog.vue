@@ -1,30 +1,30 @@
 <script setup lang="ts">
 const props = withDefaults(
   defineProps<{
-    isOpen: boolean;
-    dialogId: string;
-    title: string;
-    showBack?: boolean;
+    isOpen: boolean
+    dialogId: string
+    title: string
+    showBack?: boolean
   }>(),
   {
     showBack: false,
   },
-);
+)
 
 const emit = defineEmits<{
-  close: [];
-  back: [];
-}>();
+  close: []
+  back: []
+}>()
 
-const panelEl = useTemplateRef("panelEl");
-const titleId = computed(() => `${props.dialogId}-title`);
+const panelEl = useTemplateRef("panelEl")
+const titleId = computed(() => `${props.dialogId}-title`)
 
 onClickOutside(panelEl, (event) => {
   if (props.isOpen) {
-    emit("close");
-    event.stopPropagation();
+    emit("close")
+    event.stopPropagation()
   }
-});
+})
 </script>
 
 <template>

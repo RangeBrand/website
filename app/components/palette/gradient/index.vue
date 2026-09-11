@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { DIRECTIONS } from "~/consts/palette";
+import { DIRECTIONS } from "~/consts/palette"
 
-import type { Direction } from "~/types/palette";
+import type { Direction } from "~/types/palette"
 
 const props = defineProps<{
-  colors: DetailedColor[];
-}>();
+  colors: DetailedColor[]
+}>()
 
-const clipboard = useClipboard();
-const toast = useToast();
+const clipboard = useClipboard()
+const toast = useToast()
 
-const currentDirection = ref<Direction>(DIRECTIONS[0] as Direction);
+const currentDirection = ref<Direction>(DIRECTIONS[0] as Direction)
 
 const gradient = computed<string>(() => {
   return `background: linear-gradient(to ${
     currentDirection.value.cssValue
-  }, ${props.colors.map((color) => color.hex.toUpperCase()).join(", ")});`;
-});
+  }, ${props.colors.map((color) => color.hex.toUpperCase()).join(", ")});`
+})
 
 const copyCode = () => {
   clipboard
@@ -24,23 +24,20 @@ const copyCode = () => {
     .then(() => {
       toast.success({
         message: "گرادیانت با موفقیت کپی شد",
-      });
+      })
     })
     .catch(() => {
       // TODO: let's see what's better UX
-    });
-};
+    })
+}
 </script>
 
 <template>
-  <div
-    class="absolute inset-0 flex group transition-all duration-700"
-    :style="gradient"
-  >
+  <div class="group absolute inset-0 flex transition-all duration-700" :style="gradient">
     <code
       dir="ltr"
       :class="[
-        'block bg-white/20 hover:bg-white/50 group-hover:opacity-100 opacity-0 px-6 py-7 rounded-2xl text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-color duration-200',
+        'transition-color absolute top-1/2 left-1/2 block -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-white/20 px-6 py-7 text-center opacity-0 duration-200 group-hover:opacity-100 hover:bg-white/50',
         clipboard.isSupported ? 'cursor-copy select-none' : 'select-all',
       ]"
       title="کپی گرادیانت"
@@ -49,16 +46,13 @@ const copyCode = () => {
       {{ gradient }}
     </code>
     <ul
-      class="flex self-end mx-auto gap-2 mb-6 group-hover:opacity-100 opacity-0 transition-opacity duration-200"
+      class="mx-auto mb-6 flex gap-2 self-end opacity-0 transition-opacity duration-200 group-hover:opacity-100"
     >
       <li v-for="direction in DIRECTIONS" :key="direction.degree">
         <button
           :title="direction.cssValue"
           @click="currentDirection = direction"
-          :class="[
-            'btn',
-            { focus: currentDirection.degree === direction.degree },
-          ]"
+          :class="['btn', { focus: currentDirection.degree === direction.degree }]"
           rb-btn-icon="true"
           rb-btn-variant="ghost"
           rb-btn-size="lg"

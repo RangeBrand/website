@@ -1,26 +1,22 @@
 <script setup lang="ts">
-import type { DetailedColor } from "#shared/types/common";
+import type { DetailedColor } from "#shared/types/common"
 
-const props = defineProps<{
-  colors: DetailedColor[];
-}>();
+defineProps<{
+  colors: DetailedColor[]
+}>()
 </script>
 
 <template>
   <div dir="ltr">
-    <div class="flex rounded-lg font-bold bg-rb-violet-100">
+    <div class="flex rounded-lg bg-rb-violet-100 font-bold">
       <div class="w-1/3 px-3 py-2">رنگ</div>
       <div class="w-2/3 px-3 py-2">مقادیر</div>
     </div>
     <ul>
-      <li
-        v-for="color in colors"
-        :key="color.hex"
-        class="flex items-center my-4"
-      >
+      <li v-for="color in colors" :key="color.hex" class="my-4 flex items-center">
         <div class="w-1/3">
           <NuxtLink
-            class="size-20 rounded-lg shadow block"
+            class="block size-20 rounded-lg shadow"
             target="_blank"
             :title="`مشاهده‌ی رنگ ${color.hex} در پالت جداگانه`"
             :style="{ backgroundColor: color.hex }"

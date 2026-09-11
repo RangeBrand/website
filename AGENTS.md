@@ -14,10 +14,11 @@ Shipped so far: `/`, `/about`, `/brands`, `/brands/[id]`, `/colors`. Missing pie
 
 ## TypeScript always
 
-- New files: `.ts` or `.vue` with `<script setup lang="ts">`. No new `.js` except configs that must stay JS (e.g. `eslint.config.mjs`).
+- New files: `.ts` or `.vue` with `<script setup lang="ts">`. No new `.js` except configs that must stay JS.
 - Typed `defineProps` / `defineEmits` and typed `defineEventHandler` returns. Shared types in `shared/types/` (`#shared/types/...`). Avoid `any`.
 - Keep `typescript.typeCheck: true` in `nuxt.config.ts`.
 - Use Nuxt auto-imports; do not re-import `useFetch`, `defineStore`, etc. unless needed for types.
+- Format with [Oxfmt](https://oxc.rs/docs/guide/usage/formatter) (`pnpm fmt`). Config: `oxfmt.config.ts`. Lint with Oxlint (`pnpm lint`). Do not add Prettier or ESLint.
 
 ## Vue, Nuxt, frontend
 

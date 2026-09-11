@@ -1,17 +1,23 @@
 <script setup lang="ts">
-import Button from "../footer/action/button.vue";
+import Button from "../footer/action/button.vue"
 
-const paletteStore = usePaletteStore();
-const { isShadesVisible } = storeToRefs(paletteStore);
+const paletteStore = usePaletteStore()
+const { isShadesVisible } = storeToRefs(paletteStore)
 
 const onToggle = () => {
-  paletteStore.toggleShades();
-};
+  paletteStore.toggleShades()
+}
 </script>
 
 <template>
   <div>
-    <Button label="پرده‌ها" icon="lucide:swatch-book" title="نمایش پرده‌های رنگ" class="flex-row-reverse"
-      :aria-pressed="isShadesVisible" @click="onToggle" />
+    <Button
+      label="پرده‌ها"
+      icon="lucide:swatch-book"
+      title="نمایش پرده‌های رنگ"
+      class="flex-row-reverse"
+      :aria-pressed="isShadesVisible"
+      @click="onToggle"
+    />
   </div>
 </template>

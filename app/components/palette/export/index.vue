@@ -1,36 +1,36 @@
 <script setup lang="ts">
-import Button from "../footer/action/button.vue";
-import Dialog from "~/components/layout/dialog.vue";
-import Url from "./url.vue";
-import ExportImage from "./image.vue";
-import Code from "./code.vue";
-import type { DetailedColor } from "#shared/types/common";
+import Button from "../footer/action/button.vue"
+import Dialog from "~/components/layout/dialog.vue"
+import Url from "./url.vue"
+import ExportImage from "./image.vue"
+import Code from "./code.vue"
+import type { DetailedColor } from "#shared/types/common"
 
-const EXPORT_ID = "palette-export";
+const EXPORT_ID = "palette-export"
 
 defineProps<{
-  colors: DetailedColor[];
-  originalColors: DetailedColor[];
-}>();
+  colors: DetailedColor[]
+  originalColors: DetailedColor[]
+}>()
 
-type ExportStep = "main" | "code";
+type ExportStep = "main" | "code"
 
-const isScrollLocked = useScrollLock(window);
-const [isOpen, toggle] = useHistorySyncedToggle(EXPORT_ID);
-const step = ref<ExportStep>("main");
+const isScrollLocked = useScrollLock(window)
+const [isOpen, toggle] = useHistorySyncedToggle(EXPORT_ID)
+const step = ref<ExportStep>("main")
 
 const dialogTitle = computed(() =>
   step.value === "main" ? "خروجی از این پالت رنگی" : "Codeهای این پالت رنگی",
-);
+)
 
 watch(isOpen, (open) => {
-  isScrollLocked.value = open;
+  isScrollLocked.value = open
   if (!open) {
-    step.value = "main";
+    step.value = "main"
   }
-});
+})
 
-const close = () => toggle(false);
+const close = () => toggle(false)
 </script>
 
 <template>

@@ -1,4 +1,4 @@
 export type Direction = {
-  cssValue: string;
-  degree: number;
-};
+  cssValue: string
+  degree: number
+}

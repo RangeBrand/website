@@ -1,15 +1,16 @@
 <script setup lang="ts">
-const props = withDefaults(
+withDefaults(
   defineProps<{
-    defaultClass?: string;
-    tag?: string;
+    defaultClass?: string
+    tag?: string
   }>(),
   {
     defaultClass: "container mx-auto col gap-y-4 py-8 px-3 sm:px-0",
     tag: "main",
-  }
-);
+  },
+)
 </script>
+
 <template>
   <component
     :is="tag"

@@ -1,4 +1,4 @@
-import type { Direction } from "~/types/palette";
+import type { Direction } from "~/types/palette"
 
 export const DIRECTIONS: Direction[] = [
   {
@@ -33,4 +33,4 @@ export const DIRECTIONS: Direction[] = [
     cssValue: "left bottom",
     degree: 135,
   },
-];
+]

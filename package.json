@@ -1,16 +1,19 @@
 {
   "name": "rangebrand-website",
-  "type": "module",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint . --fix",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/eslint": "^1.17.0",
     "@nuxt/fonts": "^0.14.0",
     "@nuxt/hints": "^1.1.4",
     "@nuxt/image": "^2.1.0",
@@ -37,6 +40,8 @@
     "@iconify-json/streamline-logos": "^1.2.0",
     "@nuxt/icon": "^2.5.1",
     "@vueuse/core": "^14.4.0",
+    "oxfmt": "^0.67.0",
+    "oxlint": "^1.82.0",
     "tailwind-scrollbar": "^4.0.2",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",

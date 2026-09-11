@@ -1,11 +1,10 @@
-import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from "@tailwindcss/vite"
 
-import { SITE_DESCRIPTION, SITE_NAME } from "./shared/seo";
+import { SITE_DESCRIPTION, SITE_NAME } from "./shared/seo"
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
-    "@nuxt/eslint",
     "@nuxt/hints",
     "@nuxt/icon",
     "@nuxt/image",
@@ -74,7 +73,7 @@ export default defineNuxtConfig({
       pauseOnHover: true,
       progressBar: false,
       close: false,
-      animateInside: false
+      animateInside: false,
     },
   },
-});
+})

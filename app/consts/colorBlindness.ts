@@ -1,10 +1,10 @@
-import type { ColorBlindnessType } from "#shared/types/colorBlindness";
+import type { ColorBlindnessType } from "#shared/types/colorBlindness"
 
 export type ColorBlindnessOption = {
-  name: string;
-  type: ColorBlindnessType;
-  description: string;
-};
+  name: string
+  type: ColorBlindnessType
+  description: string
+}
 
 export const COLOR_BLINDNESS_TYPES: ColorBlindnessOption[] = [
   {
@@ -60,4 +60,4 @@ export const COLOR_BLINDNESS_TYPES: ColorBlindnessOption[] = [
     description:
       "یا کوررنگی کامل نوع نادری از این اختلال است که در آن هیچ‌یک از انواع سلول‌های مخروطی فعال نیستند و فرد قادر به تشخیص هیچ رنگی نیست.",
   },
-];
+]

@@ -1,5 +1,5 @@
-export default defineNuxtRouteMiddleware((to) => {
+export default defineNuxtRouteMiddleware((_to) => {
   setPageLayout("default", {
     wrapperTag: "div",
-  });
-});
+  })
+})

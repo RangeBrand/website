@@ -1,40 +1,37 @@
 <script setup lang="ts">
-import { range } from "lodash-es";
+import { range } from "lodash-es"
 
-import type { ListMeta } from "#shared/types/api";
+import type { ListMeta } from "#shared/types/api"
 
 const props = defineProps<{
-  meta: ListMeta;
-}>();
+  meta: ListMeta
+}>()
 
-const route = useRoute();
+const route = useRoute()
 
 const pageCount = computed(() =>
   Math.max(1, Math.ceil(props.meta.total_count / props.meta.page_size)),
-);
+)
 
-const currentPage = computed(() => props.meta.current_page);
+const currentPage = computed(() => props.meta.current_page)
 
 const pages = computed(() => {
-  const count = pageCount.value;
-  const current = currentPage.value;
-  if (count <= 7) return range(1, count + 1);
+  const count = pageCount.value
+  const current = currentPage.value
+  if (count <= 7) return range(1, count + 1)
 
-  const radius = 2;
-  const start = Math.max(1, current - radius);
-  const end = Math.min(count, current + radius);
-  return range(start, end + 1);
-});
+  const radius = 2
+  const start = Math.max(1, current - radius)
+  const end = Math.min(count, current + radius)
+  return range(start, end + 1)
+})
 
-const listBase = computed(() =>
-  route.path.replace(/\/+$/, "").replace(/\/\d+$/, ""),
-);
+const listBase = computed(() => route.path.replace(/\/+$/, "").replace(/\/\d+$/, ""))
 
-const pageLink = (page: number) =>
-  page <= 1 ? listBase.value : `${listBase.value}/${page}`;
+const pageLink = (page: number) => (page <= 1 ? listBase.value : `${listBase.value}/${page}`)
 
 const pageClass =
-  "flex size-12 mx-2 items-center justify-center rounded-full border border-transparent hover:border-rb-violet-500";
+  "flex size-12 mx-2 items-center justify-center rounded-full border border-transparent hover:border-rb-violet-500"
 </script>
 
 <template>
@@ -57,7 +54,7 @@ const pageClass =
         </NuxtLink>
         <span
           v-else
-          :class="[pageClass, 'text-black/80 pointer-events-none opacity-60']"
+          :class="[pageClass, 'pointer-events-none text-black/80 opacity-60']"
           aria-disabled="true"
           aria-label="صفحه قبل"
         >
@@ -95,7 +92,7 @@ const pageClass =
         </NuxtLink>
         <span
           v-else
-          :class="[pageClass, 'text-black/80 pointer-events-none opacity-60']"
+          :class="[pageClass, 'pointer-events-none text-black/80 opacity-60']"
           aria-disabled="true"
           aria-label="صفحه بعد"
         >

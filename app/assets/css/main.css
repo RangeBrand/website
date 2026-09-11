@@ -16,7 +16,7 @@ body {
   @apply font-sans!;
 
   &.iziToast-color-green {
-    @apply bg-rb-green-500! border-rb-green-500!;
+    @apply border-rb-green-500! bg-rb-green-500!;
 
     .iziToast-title,
     .iziToast-message {
@@ -25,7 +25,7 @@ body {
   }
 
   &.iziToast-color-red {
-    @apply bg-rb-red-500! border-rb-red-500!;
+    @apply border-rb-red-500! bg-rb-red-500!;
 
     .iziToast-title,
     .iziToast-message {
@@ -34,7 +34,7 @@ body {
   }
 
   &.iziToast-color-orange {
-    @apply bg-rb-yellow-500! border-rb-yellow-500!;
+    @apply border-rb-yellow-500! bg-rb-yellow-500!;
 
     .iziToast-title,
     .iziToast-message {
@@ -43,7 +43,7 @@ body {
   }
 
   &.iziToast-color-blue {
-    @apply bg-rb-indigo-500! border-rb-indigo-500!;
+    @apply border-rb-indigo-500! bg-rb-indigo-500!;
 
     .iziToast-title,
     .iziToast-message {

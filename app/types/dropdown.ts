@@ -1,4 +1,4 @@
 export type DropdownItem = {
-  label: string;
-  onClick: () => void;
-};
+  label: string
+  onClick: () => void
+}

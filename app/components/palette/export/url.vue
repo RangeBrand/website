@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import Action from "./action.vue";
+import Action from "./action.vue"
 
-const clipboard = useClipboard();
-const toast = useToast();
+const clipboard = useClipboard()
+const toast = useToast()
 
 const emit = defineEmits<{
-  close: [];
-}>();
+  close: []
+}>()
 
 const copyUrl = () => {
   clipboard
@@ -14,13 +14,13 @@ const copyUrl = () => {
     .then(() => {
       toast.success({
         message: "کپی شد",
-      });
-      emit("close");
+      })
+      emit("close")
     })
     .catch(() => {
       // TODO: let's see what's better UX
-    });
-};
+    })
+}
 </script>
 
 <template>

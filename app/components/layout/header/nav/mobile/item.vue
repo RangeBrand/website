@@ -1,30 +1,30 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from "vue";
-import type { NavItem } from "~/types/nav";
-import type { NuxtLinkProps } from "#app";
+import type { HTMLAttributes } from "vue"
+import type { NavItem } from "~/types/nav"
+import type { NuxtLinkProps } from "#app"
 
 const props = defineProps<{
-  item: NavItem;
-}>();
+  item: NavItem
+}>()
 
 const wrapperCompAttrs = computed<
   | (NuxtLinkProps & {
-      is: "NuxtLink";
+      is: "NuxtLink"
     })
   | (HTMLAttributes & {
-      is: "span";
+      is: "span"
     })
 >(() => {
   if (!props.item.children) {
     return {
       is: "NuxtLink",
       title: `دیدن ${props.item.title}`,
-    };
+    }
   }
   return {
     is: "span",
-  };
-});
+  }
+})
 </script>
 
 <template>
@@ -35,18 +35,18 @@ const wrapperCompAttrs = computed<
       ...wrapperCompAttrs,
     }"
     rb-link-variant="ghost"
-    class="link px-4 py-2 relative block after:content-[''] after:absolute after:inset-y-0 after:right-0 after:w-1 after:rounded-full"
+    class="link relative block px-4 py-2 after:absolute after:inset-y-0 after:right-0 after:w-1 after:rounded-full after:content-['']"
     active-class="text-rb-violet-500 after:bg-current font-bold"
   >
     {{ item.title }}
   </component>
-  <ul v-if="item.children" class="pl-4 pr-5">
+  <ul v-if="item.children" class="pr-5 pl-4">
     <li v-for="(child, index) in item.children" :key="index">
       <NuxtLink
         v-bind="child"
         :disabled="!child.href || !child.to"
         rb-link-variant="ghost"
-        class="link block px-2 py-1 hover:bg-rb-violet-100 text-sm"
+        class="link block px-2 py-1 text-sm hover:bg-rb-violet-100"
       >
         {{ child.title }}
       </NuxtLink>

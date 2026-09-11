@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import type { Hex } from "#shared/types/common";
-import type { Item } from "#shared/types/report";
+import type { Hex } from "#shared/types/common"
+import type { Item } from "#shared/types/report"
 
 defineProps<{
-  item: Item;
-}>();
+  item: Item
+}>()
 
-const clipboard = useClipboard();
-const toast = useToast();
+const clipboard = useClipboard()
+const toast = useToast()
 
 const copyCode = (hex: Hex) => {
   clipboard
@@ -15,12 +15,12 @@ const copyCode = (hex: Hex) => {
     .then(() => {
       toast.success({
         message: "کپی شد",
-      });
+      })
     })
     .catch(() => {
       // TODO: let's see what's better UX
-    });
-};
+    })
+}
 </script>
 
 <template>
@@ -43,9 +43,7 @@ const copyCode = (hex: Hex) => {
     </ul>
     <NuxtLink
       :to="item.link"
-      :title="
-        'مشاهده‌ی ' + (item.title ? `رنگ‌های ${item.title}` : 'این رنگ‌ها')
-      "
+      :title="'مشاهده‌ی ' + (item.title ? `رنگ‌های ${item.title}` : 'این رنگ‌ها')"
       rel="bookmark"
       class="link mr-4 font-bold"
       rb-link-variant="ghost"
@@ -59,17 +57,17 @@ const copyCode = (hex: Hex) => {
 @reference "~/assets/css/main.css";
 
 .card {
-  @apply bg-rb-violet-100 rounded-lg p-4;
+  @apply rounded-lg bg-rb-violet-100 p-4;
 }
 ul {
-  @apply flex overflow-hidden rounded-lg border border-gray-200 h-40 -mt-8 mb-3 bg-gray-200 shadow-lg/7;
+  @apply -mt-8 mb-3 flex h-40 overflow-hidden rounded-lg border border-gray-200 bg-gray-200 shadow-lg/7;
 }
 li {
-  @apply grow w-1 h-full overflow-hidden;
+  @apply h-full w-1 grow overflow-hidden;
   @apply hover:w-20;
 }
 code {
-  @apply h-full flex justify-center items-center text-lg font-bold uppercase px-4 select-none opacity-0;
+  @apply flex h-full items-center justify-center px-4 text-lg font-bold uppercase opacity-0 select-none;
   @apply hover:opacity-100;
 }
 

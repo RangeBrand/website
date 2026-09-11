@@ -7,7 +7,7 @@ Marketing site for [RangeBrand](https://github.com/RangeBrand) (رنگ برند)
 - [Nuxt 4](https://nuxt.com/) with the `app/` directory layout
 - [Vue 3](https://vuejs.org/) + [TypeScript](https://www.typescriptlang.org/) (build-time type checking enabled in `nuxt.config.ts`)
 - [Tailwind CSS v4](https://tailwindcss.com/) via `@tailwindcss/vite`
-- [Nuxt modules](https://nuxt.com/modules): `@nuxt/eslint`, `@nuxt/hints`, `@nuxt/image`, `@nuxt/scripts`, `@nuxt/fonts`, `@nuxtjs/device`, `@vueuse/nuxt`
+- [Nuxt modules](https://nuxt.com/modules): `@nuxt/hints`, `@nuxt/image`, `@nuxt/scripts`, `@nuxt/fonts`, `@nuxtjs/device`, `@vueuse/nuxt`
 
 The HTML document is configured for Persian content: `lang="fa"` and `dir="rtl"` in `nuxt.config.ts`. Global styles live under `app/assets/css/` (`main.css` imports Tailwind, `theme.css` for design tokens, `components.css` for shared utility classes such as `.btn` and `.link`).
 
@@ -23,16 +23,20 @@ This repo includes a `pnpm-lock.yaml`; [pnpm](https://pnpm.io/) is the expected 
 pnpm install
 ```
 
-`postinstall` runs `nuxt prepare` so local tooling (including ESLint via `eslint.config.mjs`) can resolve generated `.nuxt` config.
+`postinstall` runs `nuxt prepare` so local tooling can resolve generated `.nuxt` types.
 
 ## Scripts
 
-| Command        | Description                                      |
-| -------------- | ------------------------------------------------ |
-| `pnpm dev`     | Development server (default: `localhost:3000`)   |
-| `pnpm build`   | Production build                                 |
-| `pnpm preview` | Serve the production build locally               |
-| `pnpm generate` | Static site generation (`nuxt generate`)       |
+| Command          | Description                                    |
+| ---------------- | ---------------------------------------------- |
+| `pnpm dev`       | Development server (default: `localhost:3000`) |
+| `pnpm build`     | Production build                               |
+| `pnpm preview`   | Serve the production build locally             |
+| `pnpm generate`  | Static site generation (`nuxt generate`)       |
+| `pnpm lint`      | Oxlint                                         |
+| `pnpm lint:fix`  | Oxlint with auto-fix                           |
+| `pnpm fmt`       | Oxfmt (write)                                  |
+| `pnpm fmt:check` | Oxfmt check (CI)                               |
 
 ## Project layout
 
@@ -46,9 +50,9 @@ app/
 public/                # Static files, `CNAME` for GitHub Pages-style hosting
 ```
 
-## Linting
+## Linting and formatting
 
-ESLint is wired through `@nuxt/eslint` and `eslint.config.mjs` (extends the generated `.nuxt/eslint.config.mjs`). Run it with your editor integration or `pnpm exec eslint .` if you add a dedicated script later.
+Linting is [Oxlint](https://oxc.rs/docs/guide/usage/linter); formatting is [Oxfmt](https://oxc.rs/docs/guide/usage/formatter). Config lives in `oxlint.config.ts` and `oxfmt.config.ts`. Run `pnpm lint` / `pnpm lint:fix` and `pnpm fmt` / `pnpm fmt:check`. In VS Code, the [Oxc](https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode) extension is the default formatter.
 
 ## Further reading
 

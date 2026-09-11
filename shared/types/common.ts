@@ -1,17 +1,17 @@
-import type { HSL, RGB } from "color-convert";
+import type { HSL, RGB } from "color-convert"
 
-export type Id = string | undefined;
+export type Id = string | undefined
 
-export type Hex = `#${string}`;
+export type Hex = `#${string}`
 
 export type Color = {
-  hex: Hex;
-  isLight: boolean;
-};
+  hex: Hex
+  isLight: boolean
+}
 
 export type DetailedColor = {
-  hex: Hex;
-  rgb: RGB;
-  hsl: HSL;
-  isLight: boolean;
-};
+  hex: Hex
+  rgb: RGB
+  hsl: HSL
+  isLight: boolean
+}

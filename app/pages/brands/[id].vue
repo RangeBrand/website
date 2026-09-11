@@ -1,45 +1,45 @@
 <script setup lang="ts">
-import Palette from "~/components/palette/index.vue";
-import Main from "~/components/layout/main/index.vue";
-import ColorTable from "~/components/brand/colorTable.vue";
+import Palette from "~/components/palette/index.vue"
+import Main from "~/components/layout/main/index.vue"
+import ColorTable from "~/components/brand/colorTable.vue"
 
-import { SITE_DESCRIPTION, SITE_NAME } from "#shared/seo";
+import { SITE_DESCRIPTION, SITE_NAME } from "#shared/seo"
 
 definePageMeta({
   validate: (route) => {
-    const id = route.params.id;
-    const value = Array.isArray(id) ? id[0] : id;
-    return typeof value === "string" && !/^\d+$/.test(value);
+    const id = route.params.id
+    const value = Array.isArray(id) ? id[0] : id
+    return typeof value === "string" && !/^\d+$/.test(value)
   },
   middleware: "brand-detail-layout",
-});
+})
 
-const { params } = useRoute();
-const { data } = await useFetch(`/api/brands/${params.id}`);
+const { params } = useRoute()
+const { data } = await useFetch(`/api/brands/${params.id}`)
 
-const brand = computed(() => data.value);
+const brand = computed(() => data.value)
 
 useSeoMeta({
   title: () => (brand.value?.title ? `رنگ‌های ${brand.value.title}` : SITE_NAME),
   description: () => brand.value?.content?.[0] ?? SITE_DESCRIPTION,
   ogDescription: () => brand.value?.content?.[0] ?? SITE_DESCRIPTION,
-});
+})
 </script>
 
 <template>
   <Palette class="h-[75vh]!" v-if="brand" :colors="brand.colors" />
-  <Main v-if="brand" class="text-black text-opacity-80 py-8">
-    <h1 class="text-3xl font-bold mt-8 mb-4">
+  <Main v-if="brand" class="text-opacity-80 py-8 text-black">
+    <h1 class="mt-8 mb-4 text-3xl font-bold">
       پالت رنگ‌های رسمی {{ brand.title }} به همراه کدهای RGB و HEX
     </h1>
     <p v-for="paragraph in brand.content" :key="paragraph" class="mb-2">
       {{ paragraph }}
     </p>
     <p class="mb-2">
-      در جدول زیر رنگ‌های رسمی برند {{ brand.title }} را مشاهده می‌کنید. برای
-      اطمینان از این که متریال تبلیغاتی شما با برند {{ brand.title }} هماهنگ
-      باشد، در کارهای خود از این رنگ‌ها استفاده کنید:
+      در جدول زیر رنگ‌های رسمی برند {{ brand.title }} را مشاهده می‌کنید. برای اطمینان از این که
+      متریال تبلیغاتی شما با برند {{ brand.title }} هماهنگ باشد، در کارهای خود از این رنگ‌ها استفاده
+      کنید:
     </p>
-    <ColorTable :colors="brand.colors" class="my-4 mx-auto max-w-180 w-full" />
+    <ColorTable :colors="brand.colors" class="mx-auto my-4 w-full max-w-180" />
   </Main>
 </template>

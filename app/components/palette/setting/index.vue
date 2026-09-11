@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import Button from "./footer/action/button.vue";
-import Dropdown from "./footer/action/dropdown.vue";
+import Button from "../footer/action/button.vue"
+import Dropdown from "../footer/action/dropdown.vue"
 
-import type { DropdownItem } from "~/types/dropdown";
+import type { DropdownItem } from "~/types/dropdown"
 
-const paletteStore = usePaletteStore();
+const paletteStore = usePaletteStore()
 
-const { toggleIsolated, toggleGradient } = paletteStore;
+const { toggleIsolated, toggleGradient } = paletteStore
 
-const { isIsolated, isGradient } = storeToRefs(paletteStore);
+const { isIsolated, isGradient } = storeToRefs(paletteStore)
 
 const onIsolationToggle = () => {
-  toggleIsolated();
+  toggleIsolated()
   toggleGradient(false)
-};
+}
 
 const onGradientToggle = () => {
-  toggleGradient();
+  toggleGradient()
   toggleIsolated(false)
-};
+}
 
 const dropdownItems = computed<DropdownItem[]>(() => [
   {
@@ -33,7 +33,7 @@ const dropdownItems = computed<DropdownItem[]>(() => [
     label: "نمایش رنگ‌های مورد علاقه",
     onClick: () => alert("// TODO: show favorite colors"),
   },
-]);
+])
 </script>
 
 <template>

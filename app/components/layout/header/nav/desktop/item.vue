@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import type { NuxtLinkProps } from "#app";
-import type { ButtonHTMLAttributes } from "vue";
-import type { NavItem } from "~/types/nav";
+import type { NuxtLinkProps } from "#app"
+import type { ButtonHTMLAttributes } from "vue"
+import type { NavItem } from "~/types/nav"
 
 const props = defineProps<{
-  item: NavItem;
-}>();
+  item: NavItem
+}>()
 
 const wrapperCompAttrs = computed<
   | (NuxtLinkProps & {
-      is: "NuxtLink";
+      is: "NuxtLink"
     })
   | (ButtonHTMLAttributes & {
-      is: "button";
+      is: "button"
     })
 >(() => {
   if (!props.item.children) {
     return {
       is: "NuxtLink",
       title: `دیدن ${props.item.title}`,
-    };
+    }
   }
   return {
     is: "button",
@@ -28,18 +28,18 @@ const wrapperCompAttrs = computed<
     "aria-expanded": childrenAreOpen.value,
     "aria-haspopup": true,
     onClick: () => toggleChildren(true),
-  };
-});
+  }
+})
 
-const childrenEl = useTemplateRef("childrenEl");
-const [childrenAreOpen, toggleChildren] = useToggle(false);
+const childrenEl = useTemplateRef("childrenEl")
+const [childrenAreOpen, toggleChildren] = useToggle(false)
 
 onClickOutside(childrenEl, (e) => {
   if (childrenAreOpen.value) {
-    toggleChildren();
-    e.stopPropagation();
+    toggleChildren()
+    e.stopPropagation()
   }
-});
+})
 </script>
 
 <template>
@@ -50,7 +50,7 @@ onClickOutside(childrenEl, (e) => {
       ...wrapperCompAttrs,
     }"
     rb-link-variant="ghost"
-    class="link px-4 py-5 relative block after:content-[''] after:absolute after:inset-x-0 after:bottom-0 after:h-1 after:rounded-full"
+    class="link relative block px-4 py-5 after:absolute after:inset-x-0 after:bottom-0 after:h-1 after:rounded-full after:content-['']"
     active-class="text-rb-violet-500 after:bg-current font-bold"
   >
     {{ item.title }}
@@ -60,7 +60,7 @@ onClickOutside(childrenEl, (e) => {
       v-if="item.children"
       v-show="childrenAreOpen"
       ref="childrenEl"
-      class="absolute top-[120%] right-0 z-50 min-w-48 overflow-hidden shadow-lg border border-gray-200 rounded-lg bg-white"
+      class="absolute top-[120%] right-0 z-50 min-w-48 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg"
     >
       <ul role="menu">
         <li v-for="(child, index) in item.children" :key="index">
