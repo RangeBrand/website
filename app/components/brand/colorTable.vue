@@ -27,7 +27,7 @@ const props = defineProps<{
             :to="{
               path: '/palette',
               query: {
-                colors: color.hex.replace('#', ''),
+                colors: color.hex.replace('#', '').toLowerCase(),
               },
             }"
           />

@@ -31,7 +31,7 @@ const isOriginalBrandPage = computed(() => {
 const downloadPng = async () => {
   const subtitle = isOriginalBrandPage.value
     ? route.fullPath
-    : `/palette/?colors=${hexCodes.value.join("-")}`;
+    : `/palette/?colors=${hexCodes.value.map((code) => code.toLowerCase()).join("-")}`;
   const filename = isOriginalBrandPage.value
     ? `RangeBrand-${String(route.params.id)}.png`
     : `RangeBrand-${hexCodes.value.map((code) => code.toUpperCase()).join("_")}.png`;

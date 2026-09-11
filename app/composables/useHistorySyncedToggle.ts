@@ -5,6 +5,7 @@ const OVERLAY_HISTORY_KEY = "__rbOverlay";
  * same-URL entry so the first Back closes instead of navigating away.
  */
 export function useHistorySyncedToggle(markerId: string) {
+  const route = useRoute();
   const [isOpen, toggle] = useToggle(false);
 
   function hasOverlayHistoryState(): boolean {
@@ -57,6 +58,16 @@ export function useHistorySyncedToggle(markerId: string) {
       history.back();
     }
   });
+
+  watch(
+    () => route.fullPath,
+    () => {
+      if (!isOpen.value) return;
+      // Already on the new page — do not history.back() (that would undo navigation).
+      stripOverlayHistoryFromCurrentState();
+      isOpen.value = false;
+    },
+  );
 
   onMounted(() => {
     if (import.meta.client) {

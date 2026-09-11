@@ -5,6 +5,7 @@ import Button from "../footer/action/button.vue";
 import Aside from "~/components/layout/aside.vue";
 
 import { ADJUSTMENT_FIELDS } from "~/consts/colorAdjustment";
+import { serializePaletteColors } from "~/utils/paletteQuery";
 
 import type { ColorAdjustment } from "#shared/types/colorAdjustment";
 
@@ -31,9 +32,9 @@ watch(isColorBlindMode, (on) => {
 const close = () => toggle(false);
 
 const palettesTo = computed(() => ({
-  path: "/palettes",
+  path: "/palette",
   query: {
-    colors: altColors.value.map((color) => color.hex.replace("#", "")).join("-"),
+    colors: serializePaletteColors(altColors.value),
   },
 }));
 

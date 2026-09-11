@@ -9,6 +9,7 @@ import ColorBlindness from "./colorBlindness/index.vue";
 import Adjustment from "./adjustment/index.vue";
 
 import { PALETTE_ASIDE_INSET_CLASS, PALETTE_ASIDE_MOTION_CLASS } from "~/consts/aside";
+import { serializePaletteColors } from "~/utils/paletteQuery";
 
 import type { DetailedColor } from "#shared/types/common";
 
@@ -24,6 +25,12 @@ const { isIsolated, isGradient, originalColors, altColors, displayColors, isPale
 watch(
   () => props.colors,
   (next) => {
+    if (
+      serializePaletteColors(next) ===
+      serializePaletteColors(originalColors.value)
+    ) {
+      return;
+    }
     paletteStore.setOriginalColors(next);
   },
   { immediate: true },

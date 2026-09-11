@@ -3,6 +3,7 @@ import Button from "../footer/action/button.vue";
 import Aside from "~/components/layout/aside.vue";
 
 import { COLOR_BLINDNESS_TYPES } from "~/consts/colorBlindness";
+import { serializePaletteColors } from "~/utils/paletteQuery";
 
 import type { ColorBlindnessType } from "#shared/types/colorBlindness";
 
@@ -43,9 +44,9 @@ const onTypeChange = (type: ColorBlindnessType, event: Event) => {
 };
 
 const palettesTo = computed(() => ({
-  path: "/palettes",
+  path: "/palette",
   query: {
-    colors: altColors.value.map((color) => color.hex.replace("#", "")).join("-"),
+    colors: serializePaletteColors(altColors.value),
   },
 }));
 </script>

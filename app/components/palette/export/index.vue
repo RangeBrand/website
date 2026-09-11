@@ -15,7 +15,6 @@ defineProps<{
 
 type ExportStep = "main" | "code";
 
-const route = useRoute();
 const isScrollLocked = useScrollLock(window);
 const [isOpen, toggle] = useHistorySyncedToggle(EXPORT_ID);
 const step = ref<ExportStep>("main");
@@ -29,10 +28,6 @@ watch(isOpen, (open) => {
   if (!open) {
     step.value = "main";
   }
-});
-
-watch(route, () => {
-  toggle(false);
 });
 
 const close = () => toggle(false);

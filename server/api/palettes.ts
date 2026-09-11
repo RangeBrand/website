@@ -9,7 +9,7 @@ import type { Item } from "#shared/types/report";
 export default defineEventHandler((event): ListResponse<Item> => {
   const items: Item[] = Object.entries(palettes).map(([id, palette]) => ({
     id,
-    link: `/palette?colors=${palette.colors.map((code) => code.replace("#", "")).join("-")}`,
+    link: `/palette?colors=${palette.colors.map((code) => code.replace("#", "").toLowerCase()).join("-")}`,
     colors: palette.colors.map((code) => {
       const hex = code as Hex;
       return {

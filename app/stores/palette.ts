@@ -88,6 +88,15 @@ export const usePaletteStore = defineStore("palette", () => {
   watch(originalColors, refreshAltColors, { deep: true });
   watch(colorAdjustment, refreshAltColors, { deep: true });
 
+  const route = useRoute();
+  watch(
+    () => route.fullPath,
+    () => {
+      exitColorBlindMode();
+      exitAdjustMode();
+    },
+  );
+
   return {
     isIsolated,
     toggleIsolated,
