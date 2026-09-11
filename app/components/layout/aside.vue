@@ -23,7 +23,7 @@ const titleId = computed(() => `${props.asideId}-title`)
 onClickOutside(panelEl, (event) => {
   if (props.isOpen) {
     emit("close")
-    event.stopPropagation()
+    // event.stopPropagation()
   }
 })
 </script>

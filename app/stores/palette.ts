@@ -8,6 +8,9 @@ import type { ColorBlindnessType } from "#shared/types/colorBlindness"
 import type { DetailedColor } from "#shared/types/common"
 
 export const usePaletteStore = defineStore("palette", () => {
+  const favoritesStore = useFavoritesStore()
+  const { isOpen: isFavoritesOpen } = storeToRefs(favoritesStore)
+
   const [isIsolated, toggleIsolated] = useToggle<boolean>(false)
   const [isGradient, toggleGradient] = useToggle<boolean>(false)
   const [isShadesVisible, setShadesVisible] = useToggle<boolean>(false)
@@ -19,7 +22,9 @@ export const usePaletteStore = defineStore("palette", () => {
   const isAdjustMode = ref(false)
   const colorAdjustment = ref<ColorAdjustment>({ ...DEFAULT_COLOR_ADJUSTMENT })
 
-  const isPaletteAsideOpen = computed(() => isColorBlindMode.value || isAdjustMode.value)
+  const isPaletteAsideOpen = computed(
+    () => isColorBlindMode.value || isAdjustMode.value || isFavoritesOpen.value,
+  )
 
   const displayColors = computed(() =>
     altColors.value.length ? altColors.value : originalColors.value,
@@ -60,6 +65,7 @@ export const usePaletteStore = defineStore("palette", () => {
     setShadesVisible(false)
     isAdjustMode.value = false
     colorAdjustment.value = { ...DEFAULT_COLOR_ADJUSTMENT }
+    favoritesStore.toggleOpen(false)
     isColorBlindMode.value = true
     refreshAltColors()
   }
@@ -74,6 +80,7 @@ export const usePaletteStore = defineStore("palette", () => {
     setShadesVisible(false)
     isColorBlindMode.value = false
     colorBlindnessType.value = "normal"
+    favoritesStore.toggleOpen(false)
     isAdjustMode.value = true
     refreshAltColors()
   }
@@ -89,6 +96,7 @@ export const usePaletteStore = defineStore("palette", () => {
     if (next) {
       exitColorBlindMode()
       exitAdjustMode()
+      favoritesStore.toggleOpen(false)
     }
     setShadesVisible(next)
   }
@@ -103,6 +111,7 @@ export const usePaletteStore = defineStore("palette", () => {
       exitColorBlindMode()
       exitAdjustMode()
       toggleShades(false)
+      favoritesStore.toggleOpen(false)
     },
   )
 

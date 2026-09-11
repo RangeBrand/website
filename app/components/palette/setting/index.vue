@@ -5,6 +5,7 @@ import Dropdown from "../footer/action/dropdown.vue"
 import type { DropdownItem } from "~/types/dropdown"
 
 const paletteStore = usePaletteStore()
+const favoritesStore = useFavoritesStore()
 
 const { toggleIsolated, toggleGradient } = paletteStore
 
@@ -31,7 +32,7 @@ const dropdownItems = computed<DropdownItem[]>(() => [
   },
   {
     label: "نمایش رنگ‌های مورد علاقه",
-    onClick: () => alert("// TODO: show favorite colors"),
+    onClick: () => favoritesStore.toggleOpen(),
   },
 ])
 </script>

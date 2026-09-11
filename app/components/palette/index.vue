@@ -3,6 +3,7 @@ import List from "./list.vue"
 import Gradient from "./gradient/index.vue"
 import Footer from "./footer/index.vue"
 import Setting from "./setting/index.vue"
+import Favorites from "./favorites/index.vue"
 
 import Export from "./export/index.vue"
 import ColorBlindness from "./colorBlindness/index.vue"
@@ -74,5 +75,6 @@ watch(
         <Adjustment />
       </template>
     </Footer>
+    <Favorites />
   </div>
 </template>

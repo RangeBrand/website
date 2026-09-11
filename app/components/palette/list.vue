@@ -23,6 +23,7 @@ const props = withDefaults(
 const clipboard = useClipboard()
 const toast = useToast()
 const { isDesktop } = useDevice()
+const favoritesStore = useFavoritesStore()
 
 const listEl = useTemplateRef<HTMLUListElement>("list")
 const { width: listWidth } = useElementSize(listEl)
@@ -216,9 +217,26 @@ const actionClass = (isLight: boolean) => [
         </div>
       </Transition>
       <div
-        v-if="!hasAlts && !showShadeStack && (clipboard.isSupported || isDesktop || colorCount > 2)"
+        v-if="!hasAlts && !showShadeStack"
         class="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 pb-12 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
       >
+        <button
+          type="button"
+          :class="actionClass(color.isLight)"
+          :title="
+            favoritesStore.isFavorite(color.hex)
+              ? 'حذف از علاقه‌مندی‌ها'
+              : 'افزودن به علاقه‌مندی‌ها'
+          "
+          :aria-pressed="favoritesStore.isFavorite(color.hex)"
+          @click.stop="favoritesStore.toggleFavorite(color.hex)"
+        >
+          <Icon
+            :name="favoritesStore.isFavorite(color.hex) ? 'mdi:heart' : 'lucide:heart'"
+            size="24"
+            aria-hidden="true"
+          />
+        </button>
         <button
           v-if="colorCount > 2"
           type="button"

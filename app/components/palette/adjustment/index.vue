@@ -8,11 +8,13 @@ import { ADJUSTMENT_FIELDS } from "~/consts/colorAdjustment"
 import { serializePaletteColors } from "~/utils/paletteQuery"
 
 import type { ColorAdjustment } from "#shared/types/colorAdjustment"
+import { useFavoritesStore } from "~/stores/favorites.ts"
 
 const ADJUST_ID = "palette-color-adjust"
 
 const paletteStore = usePaletteStore()
 const { altColors, colorAdjustment, isColorBlindMode, isShadesVisible } = storeToRefs(paletteStore)
+const { isOpen: isFavoritesOpen } = storeToRefs(useFavoritesStore())
 
 const [isOpen, toggle] = useHistorySyncedToggle(ADJUST_ID)
 
@@ -29,6 +31,10 @@ watch(isColorBlindMode, (on) => {
 })
 
 watch(isShadesVisible, (on) => {
+  if (on && isOpen.value) toggle(false)
+})
+
+watch(isFavoritesOpen, (on) => {
   if (on && isOpen.value) toggle(false)
 })
 
@@ -107,10 +113,10 @@ const onFieldInput = (key: keyof ColorAdjustment, raw: string, min: number, max:
         </li>
       </ul>
       <div class="absolute inset-x-0 bottom-0 pb-4 text-center">
-        <NuxtLink :to="palettesTo" class="btn mx-1 inline-block" rb-btn-size="lg"> اعمال </NuxtLink>
+        <NuxtLink :to="palettesTo" class="btn inline-block" rb-btn-size="lg"> اعمال </NuxtLink>
         <button
           type="button"
-          class="btn mx-1"
+          class="btn"
           rb-btn-size="lg"
           rb-btn-variant="ghost"
           @click="close"
