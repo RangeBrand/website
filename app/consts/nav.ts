@@ -13,7 +13,7 @@ export const LINKS: NavItem[] = [
     title: "ابزارها",
     children: [
       {
-        // to: "/contrast-checker",
+        to: "/contrast-checker/",
         title: "محاسبه‌ی کنتراست",
       },
       {

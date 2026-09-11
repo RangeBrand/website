@@ -66,7 +66,7 @@ onClickOutside(childrenEl, (e) => {
         <li v-for="(child, index) in item.children" :key="index">
           <NuxtLink
             v-bind="child"
-            :disabled="!child.href || !child.to"
+            :disabled="!child.href && !child.to"
             rb-link-variant="ghost"
             class="link block px-4 py-2 hover:bg-rb-violet-100"
           >

@@ -5,3 +5,6 @@ export const SITE_DESCRIPTION = "رنگ برند ابزاری برای مطال�
 export const BRANDS_DESCRIPTION = "لیست برندهای مطرح در ایران به همراه رنگ‌های رسمی آن‌ها."
 
 export const COLORS_DESCRIPTION = "مجموعه‌ای از پالت‌های رنگی برای انتخاب رنگ مناسب برند."
+
+export const CONTRAST_DESCRIPTION =
+  "ابزار محاسبه کنتراست رنگ‌ها بر اساس استانداردهای دسترسی‌پذیری محتوای وب (WCAG)."
