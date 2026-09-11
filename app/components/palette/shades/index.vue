@@ -13,7 +13,7 @@ const onToggle = () => {
   <div>
     <Button
       label="پرده‌ها"
-      icon="lucide:swatch-book"
+      icon="hugeicons:swatch-book"
       title="نمایش پرده‌های رنگ"
       class="flex-row-reverse"
       :aria-pressed="isShadesVisible"

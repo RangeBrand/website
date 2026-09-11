@@ -24,5 +24,5 @@ const copyUrl = () => {
 </script>
 
 <template>
-  <Action label="کپی URL" icon="lucide:link" @click="copyUrl" />
+  <Action label="کپی URL" icon="hugeicons:link-01" @click="copyUrl" />
 </template>

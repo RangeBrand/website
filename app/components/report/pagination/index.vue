@@ -50,7 +50,7 @@ const pageClass =
           rb-link-variant="ghost"
           aria-label="صفحه قبل"
         >
-          <Icon name="lucide:chevron-right" size="16" aria-hidden="true" />
+          <Icon name="hugeicons:chevron-right" size="16" aria-hidden="true" />
         </NuxtLink>
         <span
           v-else
@@ -58,7 +58,7 @@ const pageClass =
           aria-disabled="true"
           aria-label="صفحه قبل"
         >
-          <Icon name="lucide:chevron-right" size="16" aria-hidden="true" />
+          <Icon name="hugeicons:chevron-right" size="16" aria-hidden="true" />
         </span>
       </li>
       <li v-for="page in pages" :key="page">
@@ -88,7 +88,7 @@ const pageClass =
           rb-link-variant="ghost"
           aria-label="صفحه بعد"
         >
-          <Icon name="lucide:chevron-left" size="16" aria-hidden="true" />
+          <Icon name="hugeicons:chevron-left" size="16" aria-hidden="true" />
         </NuxtLink>
         <span
           v-else
@@ -96,7 +96,7 @@ const pageClass =
           aria-disabled="true"
           aria-label="صفحه بعد"
         >
-          <Icon name="lucide:chevron-left" size="16" aria-hidden="true" />
+          <Icon name="hugeicons:chevron-left" size="16" aria-hidden="true" />
         </span>
       </li>
     </ul>

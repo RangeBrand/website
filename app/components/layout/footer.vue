@@ -2,12 +2,12 @@
 const socialLinks = [
   {
     title: "ایکس",
-    icon: "streamline-logos:x-twitter-logo-solid",
+    icon: "hugeicons:new-twitter",
     url: "https://x.com/RangeBrand",
   },
   {
     title: "گیتهاب",
-    icon: "streamline-logos:github-logo-2-solid",
+    icon: "hugeicons:github",
     url: "https://github.com/RangeBrand",
   },
 ]

@@ -64,7 +64,7 @@ const palettesTo = computed(() => ({
   <div>
     <Button
       label="شبیه‌ساز کوررنگی"
-      icon="lucide:glasses"
+      icon="hugeicons:glasses"
       title="شبیه‌ساز کوررنگی"
       :aria-expanded="isOpen"
       aria-haspopup="dialog"
@@ -91,13 +91,7 @@ const palettesTo = computed(() => ({
       </ul>
       <div class="absolute inset-x-0 bottom-0 pb-4 text-center">
         <NuxtLink :to="palettesTo" class="btn inline-block" rb-btn-size="lg"> اعمال </NuxtLink>
-        <button
-          type="button"
-          class="btn"
-          rb-btn-size="lg"
-          rb-btn-variant="ghost"
-          @click="close"
-        >
+        <button type="button" class="btn" rb-btn-size="lg" rb-btn-variant="ghost" @click="close">
           بیخیال
         </button>
       </div>

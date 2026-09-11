@@ -48,7 +48,12 @@ const copyCode = () => {
 </script>
 
 <template>
-  <Action v-if="!showSnippet" label="نمایش Code" icon="lucide:code" @click="$emit('open')" />
+  <Action
+    v-if="!showSnippet"
+    label="نمایش Code"
+    icon="hugeicons:source-code"
+    @click="$emit('open')"
+  />
   <div v-else class="p-4">
     <pre
       dir="ltr"

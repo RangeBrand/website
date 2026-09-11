@@ -47,5 +47,5 @@ const downloadPng = async () => {
 </script>
 
 <template>
-  <Action label="دانلود PNG" icon="lucide:image" @click="downloadPng" />
+  <Action label="دانلود PNG" icon="hugeicons:image-01" @click="downloadPng" />
 </template>

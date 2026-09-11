@@ -37,7 +37,7 @@ const close = () => toggle(false)
   <div>
     <Button
       label="خروجی"
-      icon="lucide:share-2"
+      icon="hugeicons:share-08"
       title="خروجی از این پالت رنگی"
       :aria-expanded="isOpen"
       aria-haspopup="dialog"

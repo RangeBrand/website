@@ -61,7 +61,7 @@ const onFieldInput = (key: keyof ColorAdjustment, raw: string, min: number, max:
   <div>
     <Button
       label="تنظیم رنگ‌ها"
-      icon="lucide:settings-2"
+      icon="hugeicons:settings-02"
       title="تنظیم رنگ‌ها"
       :aria-expanded="isOpen"
       aria-haspopup="dialog"
@@ -114,13 +114,7 @@ const onFieldInput = (key: keyof ColorAdjustment, raw: string, min: number, max:
       </ul>
       <div class="absolute inset-x-0 bottom-0 pb-4 text-center">
         <NuxtLink :to="palettesTo" class="btn inline-block" rb-btn-size="lg"> اعمال </NuxtLink>
-        <button
-          type="button"
-          class="btn"
-          rb-btn-size="lg"
-          rb-btn-variant="ghost"
-          @click="close"
-        >
+        <button type="button" class="btn" rb-btn-size="lg" rb-btn-variant="ghost" @click="close">
           بیخیال
         </button>
       </div>

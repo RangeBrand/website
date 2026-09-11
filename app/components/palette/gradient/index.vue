@@ -59,7 +59,7 @@ const copyCode = () => {
           :active="true"
         >
           <Icon
-            name="lucide:chevron-right"
+            name="hugeicons:arrow-right-01"
             size="20"
             :style="{
               transform: `rotate(${direction.degree}deg)`,

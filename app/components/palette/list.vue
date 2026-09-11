@@ -210,7 +210,7 @@ const actionClass = (isLight: boolean) => [
               @click="copyCode(shade.hex)"
             >
               <span :class="actionClass(shade.isLight)">
-                <Icon name="lucide:copy" size="20" aria-hidden="true" />
+                <Icon name="hugeicons:copy-01" size="20" aria-hidden="true" />
               </span>
             </button>
           </div>
@@ -232,7 +232,7 @@ const actionClass = (isLight: boolean) => [
           @click.stop="favoritesStore.toggleFavorite(color.hex)"
         >
           <Icon
-            :name="favoritesStore.isFavorite(color.hex) ? 'mdi:heart' : 'lucide:heart'"
+            :name="favoritesStore.isFavorite(color.hex) ? 'hugeicons:heart-check' : 'hugeicons:heart'"
             size="24"
             aria-hidden="true"
           />
@@ -244,7 +244,7 @@ const actionClass = (isLight: boolean) => [
           title="حذف رنگ"
           @click="removeColor(index)"
         >
-          <Icon name="lucide:trash-2" size="24" aria-hidden="true" />
+          <Icon name="hugeicons:delete-02" size="24" aria-hidden="true" />
         </button>
         <button
           v-if="isDesktop"
@@ -256,7 +256,7 @@ const actionClass = (isLight: boolean) => [
           title="جابه‌جایی رنگ"
           @pointerdown="onMovePointerDown($event, index)"
         >
-          <Icon name="lucide:move" size="24" aria-hidden="true" />
+          <Icon name="hugeicons:drag-drop" size="24" aria-hidden="true" />
         </button>
         <button
           v-if="clipboard.isSupported"
@@ -265,7 +265,7 @@ const actionClass = (isLight: boolean) => [
           title="کپی رنگ"
           @click="copyCode(color.hex)"
         >
-          <Icon name="lucide:copy" size="24" aria-hidden="true" />
+          <Icon name="hugeicons:copy-01" size="24" aria-hidden="true" />
         </button>
       </div>
     </li>

@@ -34,7 +34,7 @@ watch(isMenuOpen, (newVal) => {
       :aria-label="isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'"
       @click="toggleMenu()"
     >
-      <Icon name="lucide:menu" size="32" />
+      <Icon name="hugeicons:menu-01" size="32" />
     </button>
     <Transition name="fade-in">
       <nav
@@ -61,7 +61,7 @@ watch(isMenuOpen, (newVal) => {
                 aria-label="Close navigation menu"
                 @click="toggleMenu(false)"
               >
-                <Icon name="lucide:circle-x" size="32" />
+                <Icon name="hugeicons:cancel-circle" size="32" />
               </button>
             </div>
             <ul role="menu">

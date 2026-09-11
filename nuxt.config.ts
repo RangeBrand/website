@@ -52,6 +52,12 @@ export default defineNuxtConfig({
     ],
   },
 
+  icon: {
+    serverBundle: {
+      collections: ["hugeicons"],
+    },
+  },
+
   compatibilityDate: "2025-01-15",
 
   typescript: {

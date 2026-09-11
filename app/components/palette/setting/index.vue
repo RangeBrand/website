@@ -43,7 +43,7 @@ const dropdownItems = computed<DropdownItem[]>(() => [
       <Button
         label="تنظیمات"
         title="باز کردن تنظیمات"
-        icon="lucide:settings"
+        icon="hugeicons:settings-01"
         v-on="on"
         v-bind="$attrs"
         :aria-expanded="isOpen"

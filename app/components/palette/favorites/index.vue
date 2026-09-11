@@ -90,25 +90,17 @@ const copyCode = (hex: Hex) => {
             title="حذف از علاقه‌مندی‌ها"
             @click.stop="favoritesStore.removeFavorite(color.hex)"
           >
-            <Icon name="mdi:heart" size="20" aria-hidden="true" />
+            <Icon name="hugeicons:heart-check" size="20" aria-hidden="true" />
           </button>
         </div>
       </li>
     </ul>
 
     <div class="absolute inset-x-0 bottom-0 pb-4 text-center">
-        <NuxtLink :to="palettesTo" class="btn inline-block" rb-btn-size="lg">
-          مشاهده
-        </NuxtLink>
-        <button
-          type="button"
-          class="btn"
-          rb-btn-size="lg"
-          rb-btn-variant="ghost"
-          @click="close"
-        >
-          بیخیال
-        </button>
-      </div>
+      <NuxtLink :to="palettesTo" class="btn inline-block" rb-btn-size="lg"> مشاهده </NuxtLink>
+      <button type="button" class="btn" rb-btn-size="lg" rb-btn-variant="ghost" @click="close">
+        بیخیال
+      </button>
+    </div>
   </Aside>
 </template>

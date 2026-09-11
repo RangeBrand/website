@@ -53,7 +53,7 @@ onClickOutside(panelEl, (event) => {
               aria-label="بستن"
               @click="emit('close')"
             >
-              <Icon name="lucide:x" size="24" />
+              <Icon name="hugeicons:cancel-01" size="24" />
             </button>
             <span :id="titleId" class="grow">{{ title }}</span>
             <button
@@ -65,7 +65,7 @@ onClickOutside(panelEl, (event) => {
               aria-label="بازگشت"
               @click="emit('back')"
             >
-              <Icon name="lucide:arrow-left" size="24" />
+              <Icon name="hugeicons:arrow-left-01" size="24" />
             </button>
           </div>
           <slot />
