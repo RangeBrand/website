@@ -55,5 +55,5 @@ useSeoMeta({
 </script>
 
 <template>
-  <Palette :colors="fromQuery" class="h-[calc(100dvh-4rem)]!" />
+  <Palette :colors="fromQuery" shades class="h-[calc(100dvh-4rem)]!" />
 </template>

@@ -10,7 +10,8 @@ import type { ColorBlindnessType } from "#shared/types/colorBlindness";
 const COLOR_BLINDNESS_ID = "palette-color-blindness";
 
 const paletteStore = usePaletteStore();
-const { altColors, isAdjustMode } = storeToRefs(paletteStore);
+const { altColors, isAdjustMode, isShadesVisible } =
+  storeToRefs(paletteStore);
 
 const selectedType = ref<ColorBlindnessType>("normal");
 
@@ -35,6 +36,10 @@ watch(isAdjustMode, (on) => {
   if (on && isOpen.value) toggle(false);
 });
 
+watch(isShadesVisible, (on) => {
+  if (on && isOpen.value) toggle(false);
+});
+
 const close = () => toggle(false);
 
 const onTypeChange = (type: ColorBlindnessType, event: Event) => {
@@ -54,7 +59,7 @@ const palettesTo = computed(() => ({
 <template>
   <div>
     <Button label="شبیه‌ساز کوررنگی" icon="lucide:glasses" title="شبیه‌ساز کوررنگی" :aria-expanded="isOpen"
-      aria-haspopup="dialog" :aria-controls="COLOR_BLINDNESS_ID" @click="toggle()" />
+      aria-haspopup="dialog" class="flex-row-reverse" :aria-controls="COLOR_BLINDNESS_ID" @click="toggle()" />
     <Aside :is-open="isOpen" :aside-id="COLOR_BLINDNESS_ID" title="شبیه‌ساز کوررنگی" @close="close">
       <ul class="min-h-0 grow overflow-y-auto p-4 pb-24">
         <li v-for="blindness in COLOR_BLINDNESS_TYPES" :key="blindness.type">

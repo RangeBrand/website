@@ -10,6 +10,7 @@ import type { DetailedColor } from "#shared/types/common";
 export const usePaletteStore = defineStore("palette", () => {
   const [isIsolated, toggleIsolated] = useToggle<boolean>(false);
   const [isGradient, toggleGradient] = useToggle<boolean>(false);
+  const [isShadesVisible, setShadesVisible] = useToggle<boolean>(false);
 
   const originalColors = ref<DetailedColor[]>([]);
   const altColors = ref<DetailedColor[]>([]);
@@ -60,6 +61,7 @@ export const usePaletteStore = defineStore("palette", () => {
   };
 
   const enterColorBlindMode = () => {
+    setShadesVisible(false);
     isAdjustMode.value = false;
     colorAdjustment.value = { ...DEFAULT_COLOR_ADJUSTMENT };
     isColorBlindMode.value = true;
@@ -73,6 +75,7 @@ export const usePaletteStore = defineStore("palette", () => {
   };
 
   const enterAdjustMode = () => {
+    setShadesVisible(false);
     isColorBlindMode.value = false;
     colorBlindnessType.value = "normal";
     isAdjustMode.value = true;
@@ -85,6 +88,15 @@ export const usePaletteStore = defineStore("palette", () => {
     refreshAltColors();
   };
 
+  const toggleShades = (value?: boolean) => {
+    const next = typeof value === "boolean" ? value : !isShadesVisible.value;
+    if (next) {
+      exitColorBlindMode();
+      exitAdjustMode();
+    }
+    setShadesVisible(next);
+  };
+
   watch(originalColors, refreshAltColors, { deep: true });
   watch(colorAdjustment, refreshAltColors, { deep: true });
 
@@ -94,6 +106,7 @@ export const usePaletteStore = defineStore("palette", () => {
     () => {
       exitColorBlindMode();
       exitAdjustMode();
+      toggleShades(false);
     },
   );
 
@@ -102,6 +115,8 @@ export const usePaletteStore = defineStore("palette", () => {
     toggleIsolated,
     isGradient,
     toggleGradient,
+    isShadesVisible,
+    toggleShades,
     originalColors,
     altColors,
     colorBlindnessType,

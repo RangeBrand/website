@@ -2,6 +2,8 @@
 <script setup lang="ts">
 import { clamp } from "lodash-es";
 
+import { generateColorShades } from "~/utils/generateColorShades";
+
 import type { DetailedColor, Hex } from "#shared/types/common";
 
 const colors = defineModel<DetailedColor[]>({ required: true });
@@ -9,9 +11,11 @@ const colors = defineModel<DetailedColor[]>({ required: true });
 const props = withDefaults(
   defineProps<{
     isolated: boolean;
+    showShades?: boolean;
     altColors?: DetailedColor[];
   }>(),
   {
+    showShades: false,
     altColors: () => [],
   },
 );
@@ -51,6 +55,8 @@ const hasAlts = computed(
     props.altColors.length > 0 &&
     props.altColors.length === colors.value.length,
 );
+
+const showShadeStack = computed(() => props.showShades && !hasAlts.value);
 
 const resetTranslates = () => {
   translates.value = colors.value.map(() => 0);
@@ -137,44 +143,27 @@ const actionClass = (isLight: boolean) => [
 </script>
 
 <template>
-  <ul
-    ref="list"
-    :data-isolated="isolated"
-    :data-dragging="activeIndex !== null"
-    :data-split="hasAlts"
-  >
-    <li
-      v-for="(color, index) in colors"
-      :key="`${color.hex}-${index}`"
-      :class="[
-        'group',
-        !hasAlts && (color.isLight ? 'text-black/80' : 'text-white/80'),
-        index === activeIndex ? 'z-50' : 'z-0 transition-transform duration-200',
-      ]"
-      :style="{
-        backgroundColor: hasAlts ? undefined : color.hex,
-        width: `${colorWidthPercent}%`,
-        insetInlineStart: `${colorWidthPercent * index}%`,
-        transform: `translateX(${translates[index] ?? 0}px)`,
-      }"
-    >
+  <ul ref="list" :data-isolated="isolated" :data-dragging="activeIndex !== null" :data-split="hasAlts"
+    :data-shades="showShadeStack">
+    <li v-for="(color, index) in colors" :key="`${color.hex}-${index}`" :class="[
+      'group',
+      !hasAlts && (color.isLight ? 'text-black/80' : 'text-white/80'),
+      index === activeIndex ? 'z-50' : 'z-0 transition-transform duration-200',
+    ]" :style="{
+      backgroundColor: hasAlts ? undefined : color.hex,
+      width: `${colorWidthPercent}%`,
+      insetInlineStart: `${colorWidthPercent * index}%`,
+      transform: `translateX(${translates[index] ?? 0}px)`,
+    }">
       <template v-if="hasAlts && altColors[index]">
-        <div
-          class="flex h-1/2 items-end justify-center"
-          :class="
-            altColors[index].isLight ? 'text-black/80' : 'text-white/80'
-          "
-          :style="{ backgroundColor: altColors[index].hex }"
-        >
+        <div class="flex h-1/2 items-end justify-center" :class="altColors[index].isLight ? 'text-black/80' : 'text-white/80'
+          " :style="{ backgroundColor: altColors[index].hex }">
           <code dir="ltr">
             {{ altColors[index].hex.replace("#", "") }}
           </code>
         </div>
-        <div
-          class="flex h-1/2 items-end justify-center"
-          :class="color.isLight ? 'text-black/80' : 'text-white/80'"
-          :style="{ backgroundColor: color.hex }"
-        >
+        <div class="flex h-1/2 items-end justify-center" :class="color.isLight ? 'text-black/80' : 'text-white/80'"
+          :style="{ backgroundColor: color.hex }">
           <code dir="ltr">
             {{ color.hex.replace("#", "") }}
           </code>
@@ -183,40 +172,66 @@ const actionClass = (isLight: boolean) => [
       <code v-else dir="ltr">
         {{ color.hex.replace("#", "") }}
       </code>
-      <div
-        v-if="
-          !hasAlts && (clipboard.isSupported || isDesktop || colorCount > 2)
-        "
-        class="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 pb-12 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-      >
-        <button
-          v-if="colorCount > 2"
-          type="button"
-          :class="actionClass(color.isLight)"
-          title="حذف رنگ"
-          @click="removeColor(index)"
+      <Transition name="fade-in">
+        <div
+          v-if="showShadeStack"
+          class="absolute inset-0 z-20 flex flex-col"
         >
+          <div
+            v-for="shade in generateColorShades(color)"
+            :key="shade.hex"
+            class="group/shade relative flex min-h-0 flex-1 items-center justify-center"
+            :class="[
+              shade.isLight ? 'text-black/80' : 'text-white/80',
+              shade.hex.toUpperCase() === color.hex.toUpperCase() &&
+                'border-t-4 border-white',
+            ]"
+            :style="{ backgroundColor: shade.hex }"
+          >
+            <code
+              v-if="shade.hex.toUpperCase() !== color.hex.toUpperCase()"
+              dir="ltr"
+              class="p-0 text-sm transition-opacity duration-200 group-hover/shade:opacity-0"
+            >
+              {{ shade.hex.replace("#", "") }}
+            </code>
+            <button
+              v-if="
+                clipboard.isSupported &&
+                shade.hex.toUpperCase() !== color.hex.toUpperCase()
+              "
+              type="button"
+              :class="[
+                'absolute inset-0 z-10 flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover/shade:opacity-100',
+              ]"
+              title="کپی رنگ"
+              @click="copyCode(shade.hex)"
+            >
+              <span :class="actionClass(shade.isLight)">
+                <Icon name="lucide:copy" size="20" aria-hidden="true" />
+              </span>
+            </button>
+          </div>
+        </div>
+      </Transition>
+      <div v-if="
+        !hasAlts &&
+        !showShadeStack &&
+        (clipboard.isSupported || isDesktop || colorCount > 2)
+      "
+        class="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 pb-12 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+        <button v-if="colorCount > 2" type="button" :class="actionClass(color.isLight)" title="حذف رنگ"
+          @click="removeColor(index)">
           <Icon name="lucide:trash-2" size="24" aria-hidden="true" />
         </button>
-        <button
-          v-if="isDesktop"
-          type="button"
-          :class="[
-            actionClass(color.isLight),
-            activeIndex === index ? 'cursor-grabbing' : 'cursor-grab',
-          ]"
-          title="جابه‌جایی رنگ"
-          @pointerdown="onMovePointerDown($event, index)"
-        >
+        <button v-if="isDesktop" type="button" :class="[
+          actionClass(color.isLight),
+          activeIndex === index ? 'cursor-grabbing' : 'cursor-grab',
+        ]" title="جابه‌جایی رنگ" @pointerdown="onMovePointerDown($event, index)">
           <Icon name="lucide:move" size="24" aria-hidden="true" />
         </button>
-        <button
-          v-if="clipboard.isSupported"
-          type="button"
-          :class="actionClass(color.isLight)"
-          title="کپی رنگ"
-          @click="copyCode(color.hex)"
-        >
+        <button v-if="clipboard.isSupported" type="button" :class="actionClass(color.isLight)" title="کپی رنگ"
+          @click="copyCode(color.hex)">
           <Icon name="lucide:copy" size="24" aria-hidden="true" />
         </button>
       </div>
@@ -232,7 +247,8 @@ ul {
 
   &[data-isolated="true"] {
     @apply p-2;
-    & > li {
+
+    &>li {
       @apply overflow-hidden rounded-lg;
     }
   }
@@ -241,7 +257,8 @@ ul {
     @apply cursor-grabbing select-none;
   }
 
-  &[data-split="true"] li {
+  &[data-split="true"] li,
+  &[data-shades="true"] li {
     @apply flex-col items-stretch justify-stretch;
   }
 }
