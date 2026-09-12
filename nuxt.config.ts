@@ -59,6 +59,16 @@ export default defineNuxtConfig({
     },
   },
 
+  scripts: {
+    registry: {
+      googleAnalytics: {
+        id: process.env.NUXT_PUBLIC_SCRIPTS_GOOGLE_ANALYTICS_ID,
+        trigger: "onNuxtReady",
+        proxy: false,
+      },
+    },
+  },
+
   hooks: {
     "prerender:routes"(ctx) {
       for (const id of Object.keys(brands)) {
