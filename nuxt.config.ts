@@ -1,4 +1,5 @@
 import tailwindcss from "@tailwindcss/vite"
+import brands from "rangebrand/brands"
 
 import { SITE_DESCRIPTION, SITE_NAME } from "./shared/seo"
 
@@ -55,6 +56,14 @@ export default defineNuxtConfig({
   icon: {
     serverBundle: {
       collections: ["hugeicons"],
+    },
+  },
+
+  hooks: {
+    "prerender:routes"(ctx) {
+      for (const id of Object.keys(brands)) {
+        ctx.routes.add(`/og/brands/${id}.png`)
+      }
     },
   },
 

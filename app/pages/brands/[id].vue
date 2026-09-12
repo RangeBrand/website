@@ -3,7 +3,8 @@ import Palette from "~/components/palette/index.vue"
 import Main from "~/components/layout/main/index.vue"
 import ColorTable from "~/components/brand/colorTable.vue"
 
-import { SITE_DESCRIPTION, SITE_NAME } from "#shared/seo"
+import { SITE_DESCRIPTION, SITE_NAME, SITE_ORIGIN } from "#shared/seo"
+import { PALETTE_PNG } from "#shared/utils/drawPaletteCanvas"
 
 definePageMeta({
   validate: (route) => {
@@ -14,15 +15,26 @@ definePageMeta({
   middleware: "brand-detail-layout",
 })
 
-const { params } = useRoute()
-const { data } = await useFetch(`/api/brands/${params.id}`)
+const route = useRoute()
+const { data } = await useFetch(`/api/brands/${route.params.id}`)
 
 const brand = computed(() => data.value)
+
+const thumbnail = computed(() => {
+  const id = route.params.id
+  const value = Array.isArray(id) ? id[0] : id
+  return typeof value === "string" ? `${SITE_ORIGIN}/og/brands/${value}.png` : undefined
+})
 
 useSeoMeta({
   title: () => (brand.value?.title ? `رنگ‌های ${brand.value.title}` : SITE_NAME),
   description: () => brand.value?.content?.[0] ?? SITE_DESCRIPTION,
   ogDescription: () => brand.value?.content?.[0] ?? SITE_DESCRIPTION,
+  ogImage: () => thumbnail.value,
+  ogImageWidth: PALETTE_PNG.width,
+  ogImageHeight: PALETTE_PNG.height,
+  twitterCard: "summary_large_image",
+  twitterImage: () => thumbnail.value,
 })
 </script>
 
