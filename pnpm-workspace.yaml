@@ -1,7 +1,9 @@
 allowBuilds:
   "@parcel/watcher": true
+  es5-ext: true
   esbuild: true
   sharp: true
   unrs-resolver: true
 minimumReleaseAgeExclude:
   - rangebrand@1.0.0
+  - color-namer-locale@1.0.0

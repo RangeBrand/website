@@ -1,5 +1,7 @@
 import { pick, uniq } from "lodash-es"
 import colorConvert from "color-convert"
+import colorNamer from "color-namer"
+import { fa } from "color-namer-locale"
 import brands from "rangebrand/brands"
 
 import { formatList } from "#shared/utils/intl"
@@ -28,8 +30,19 @@ export default defineEventHandler(async (event: H3Event): Promise<DetailResponse
 
   const isClosed = brand.tags.some((tag) => tag.toLowerCase() === "closed")
 
+  type ColorMode = "basic" | "html" | "x11" | "toygbiv" | "pantone"
+
+  const COLOR_MODE: ColorMode = "html"
+
   const colorNames = formatList(
-    uniq(brand.colors.map((code) => colorConvert.hex.keyword(code))), // TODO: translate names to farsi
+    uniq(
+      brand.colors
+        .map((code) => {
+          const name = colorNamer(code as Hex)[COLOR_MODE][0]?.name
+          return name ? `«${fa[COLOR_MODE][name as keyof (typeof fa)[typeof COLOR_MODE]]}»` : null
+        })
+        .filter((name) => name !== null),
+    ),
   )
 
   return {
@@ -37,7 +50,7 @@ export default defineEventHandler(async (event: H3Event): Promise<DetailResponse
     content: [
       brand.long_description ||
         `${brand.title} یک ${brand.description} ${nationality || ""} ${
-          isClosed && "بود که همکنون به فعالیت خود پایان داده"
+          isClosed ? "بود که همکنون به فعالیت خود پایان داده" : ""
         } است.`,
       `${brand.title} از رنگ‌های ${colorNames} در هویت سازمانی خود استفاده می‌کند.`,
     ],
