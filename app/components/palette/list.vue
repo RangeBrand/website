@@ -3,6 +3,8 @@
 import { clamp } from "lodash-es"
 
 import { generateColorShades } from "~/utils/generateColorShades"
+import { mixHexMidpoint } from "~/utils/mixHexMidpoint"
+import { toDetailedColor } from "#shared/utils/toDetailedColor"
 
 import type { DetailedColor, Hex } from "#shared/types/common"
 
@@ -128,6 +130,19 @@ const removeColor = (index: number) => {
   next.splice(index, 1)
   colors.value = next
 }
+
+const insertColor = (index: number) => {
+  const left = colors.value[index - 1]
+  const right = colors.value[index]
+  if (!left || !right) return
+  const next = [...colors.value]
+  next.splice(index, 0, toDetailedColor(mixHexMidpoint(left.hex, right.hex)))
+  colors.value = next
+}
+
+const showInsertGutters = computed(
+  () => colorCount.value > 1 && activeIndex.value === null && !showShadeStack.value,
+)
 
 const actionClass = (isLight: boolean) => [
   "pointer-events-auto inline-flex cursor-pointer items-center justify-center rounded-full p-3 transition-colors duration-200",
@@ -271,6 +286,23 @@ const actionClass = (isLight: boolean) => [
         </button>
       </div>
     </li>
+    <div
+      v-for="index in showInsertGutters ? colorCount - 1 : 0"
+      :key="`insert-${index}`"
+      class="absolute inset-y-0 z-30 -ms-5 flex w-10 items-center justify-center opacity-0 transition-opacity duration-200 hover:opacity-100"
+      :style="{ insetInlineStart: `${colorWidthPercent * index}%` }"
+    >
+      <button
+        type="button"
+        title="افزودن رنگ"
+        class="btn"
+        rb-btn-icon="true"
+        rb-btn-size="lg"
+        @click.stop="insertColor(index)"
+      >
+        <Icon name="hugeicons:add-01" size="20" aria-hidden="true" />
+      </button>
+    </div>
   </ul>
 </template>
 
