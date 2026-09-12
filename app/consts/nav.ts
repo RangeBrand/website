@@ -17,7 +17,7 @@ export const LINKS: NavItem[] = [
         title: "محاسبه‌ی کنتراست",
       },
       {
-        // to: "/color",
+        to: "/color/",
         title: "تبدیل RGB به HEX",
       },
       {

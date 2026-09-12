@@ -8,3 +8,5 @@ export const COLORS_DESCRIPTION = "مجموعه‌ای از پالت‌های ر
 
 export const CONTRAST_DESCRIPTION =
   "ابزار محاسبه کنتراست رنگ‌ها بر اساس استانداردهای دسترسی‌پذیری محتوای وب (WCAG)."
+
+export const COLOR_DESCRIPTION = "ابزار تبدیل مقادیر RGB به کد رنگ HEX."
