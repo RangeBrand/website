@@ -57,6 +57,9 @@ export default defineNuxtConfig({
     serverBundle: {
       collections: ["hugeicons"],
     },
+    clientBundle: {
+      scan: true,
+    },
   },
 
   scripts: {
