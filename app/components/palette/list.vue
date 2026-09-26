@@ -34,6 +34,9 @@ const activeIndex = ref<number | null>(null)
 const translates = ref<number[]>([])
 
 let dragStartX = 0
+let dragDeltaX = 0
+let activeColumnEl: HTMLElement | null = null
+let shiftedNeighbor: number | null = null
 
 watch(
   colors,
@@ -62,6 +65,9 @@ const resetTranslates = () => {
 const onMovePointerDown = (event: PointerEvent, index: number) => {
   event.preventDefault()
   dragStartX = event.clientX
+  dragDeltaX = 0
+  shiftedNeighbor = null
+  activeColumnEl = (event.currentTarget as HTMLElement).closest("li")
   activeIndex.value = index
   ;(event.currentTarget as HTMLElement).setPointerCapture(event.pointerId)
 }
@@ -73,16 +79,22 @@ const onMovePointerMove = (event: PointerEvent) => {
   const width = colorWidth.value
   if (!width) return
 
-  const delta = event.clientX - dragStartX
-  const next = colors.value.map(() => 0)
-  next[from] = delta
+  dragDeltaX = event.clientX - dragStartX
+  if (activeColumnEl) {
+    activeColumnEl.style.setProperty("--drag-x", `${dragDeltaX}px`)
+  }
 
-  const distant = Math.round(delta / width)
+  const distant = Math.round(dragDeltaX / width)
   const neighbor = from - distant
-  if (distant !== 0 && neighbor in next) {
+  const nextNeighbor = distant !== 0 && neighbor in colors.value ? neighbor : null
+  if (nextNeighbor === shiftedNeighbor) return
+
+  const next = colors.value.map(() => 0)
+  if (nextNeighbor !== null) {
     next[neighbor] = width * Math.sign(distant) * -1
   }
 
+  shiftedNeighbor = nextNeighbor
   translates.value = next
 }
 
@@ -91,7 +103,7 @@ const onMovePointerUp = () => {
   if (from === null) return
 
   const width = colorWidth.value
-  const distant = width ? Math.round((translates.value[from] ?? 0) / width) : 0
+  const distant = width ? Math.round(dragDeltaX / width) : 0
   const to = clamp(from - distant, 0, colorCount.value - 1)
 
   if (distant !== 0 && to !== from) {
@@ -103,6 +115,10 @@ const onMovePointerUp = () => {
     }
   }
 
+  activeColumnEl?.style.removeProperty("--drag-x")
+  activeColumnEl = null
+  dragDeltaX = 0
+  shiftedNeighbor = null
   activeIndex.value = null
   resetTranslates()
 }
@@ -164,13 +180,17 @@ const actionClass = (isLight: boolean) => [
       :class="[
         'group',
         !hasAlts && (color.isLight ? 'text-black/80' : 'text-white/80'),
-        index === activeIndex ? 'z-50' : 'z-0 transition-transform duration-200',
+        index === activeIndex ? 'z-50 transition-none' : 'z-0 transition-transform duration-200',
       ]"
       :style="{
         backgroundColor: hasAlts ? undefined : color.hex,
         width: `${colorWidthPercent}%`,
         insetInlineStart: `${colorWidthPercent * index}%`,
-        transform: `translateX(${translates[index] ?? 0}px)`,
+        transform:
+          index === activeIndex
+            ? 'translate3d(var(--drag-x, 0px), 0, 0)'
+            : `translateX(${translates[index] ?? 0}px)`,
+        transition: index === activeIndex ? 'none' : undefined,
       }"
     >
       <template v-if="hasAlts && altColors[index]">
